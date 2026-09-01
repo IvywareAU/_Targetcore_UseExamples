@@ -1,0 +1,17 @@
+# Build output. Each of the five trees keeps its own root and its own .gitignore
+# saying what lands there; these patterns are unanchored so they hold at every
+# depth, which is what makes them survive a tree being moved.
+#
+#   <Tree>\out\<Platform>\<Configuration>\            exes + staged runtime DLLs
+#   <Tree>\out\<Platform>\<Configuration>\obj\<Proj>\ intermediates
+#
+# Pinned per tree: in each .vcxproj in DirectExamples, in common\*.props in
+# ComExamples and FacadeExamples, and in build.ps1 in dotNetExamples and
+# PanamaJavaExamples. The last of those also stages native DLLs into bin\, which
+# its OWN .gitignore covers -- deliberately not repeated here, because `bin/`
+# unanchored at the root would swallow any directory of that name anywhere.
+out/
+
+logs/
+.vs/
+*.user

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2026 Khrustal & Mann
+                MELBOURNE, VICTORIA, AUSTRALIA, 3000
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+   implied. See the License for the specific language governing
+   permissions and limitations under the License.
+-->
+<!--
+  Com.props : every setting all eleven COM harnesses share.
+
+  Note what is NOT here. A COM client links NO project library at all: not
+  TargetFacade.lib, not TargetCore.lib, nothing. It binds to the type library's
+  interfaces at compile time and to the registered coclass at run time, so the
+  only inputs are ole32/oleaut32/uuid and the MIDL output header.
+
+  That MIDL output lives in the TargetCom project's intermediate directory, so
+  TargetCom must be built before these are. Building the solution does that.
+
+  All four runtime DLLs are staged next to the exes, and run_all.ps1 registers
+  the STAGED copy of TargetCom, so nothing here depends on, or writes to, the
+  TargetFacade tree.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup Label="ComPaths">
+    <ComRoot>$(MSBuildThisFileDirectory)..\</ComRoot>
+    <FacadeRoot>$(MSBuildThisFileDirectory)..\..\..\TargetFacade\</FacadeRoot>
+    <McsBinRoot>$(MSBuildThisFileDirectory)..\..\..\bin\</McsBinRoot>
+    <ComCoreDir Condition="'$(Configuration)'=='Debug'">$(McsBinRoot)Debug64\</ComCoreDir>
+    <ComCoreDir Condition="'$(Configuration)'=='Release'">$(McsBinRoot)Release64\</ComCoreDir>
+    <!-- Artifact names carry no "(2022)" and no debug "d" any more: only the
+         DIRECTORY keeps Debug and Release apart, as everywhere else in this
+         tree.  The ComSuffix property is gone with them. -->
+    <!-- MIDL output of TargetCom: TargetCom_h.h + TargetCom_i.c. It lives in
+         that project's intermediate directory, which the facade's shared output
+         root now puts at out\<Platform>\<Config>\obj\TargetCom\ rather than in
+         com\x64\<Config>\. -->
+    <ComIdlDir>$(FacadeRoot)out\$(Platform)\$(Configuration)\obj\TargetCom\</ComIdlDir>
+  </PropertyGroup>
+
+  <!-- One output root for all eleven harnesses: out\<Platform>\<Configuration>\
+       for the exes, with intermediates in obj\<ProjectName>\ underneath.
+       Replaces the split bin\<Config>\ and obj\<Project>\<Config>\ pair, and
+       keys both on platform so a second architecture could not overwrite the
+       first. -->
+  <PropertyGroup>
+    <OutDir>$(ComRoot)out\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ComRoot)out\$(Platform)\$(Configuration)\obj\$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <LinkIncremental Condition="'$(Configuration)'=='Debug'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)'=='Release'">false</LinkIncremental>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization Condition="'$(Configuration)'=='Debug'">Disabled</Optimization>
+      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Debug'">MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Release'">MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ComIdlDir);$(MSBuildThisFileDirectory);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ole32.lib;oleaut32.lib;uuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /D "$(FacadeRoot)out\$(Platform)\$(Configuration)\TargetCom.dll" "$(OutDir)"
+xcopy /Y /D "$(FacadeRoot)out\$(Platform)\$(Configuration)\TargetFacade.dll" "$(OutDir)"
+xcopy /Y /D "$(ComCoreDir)TargetCore.dll" "$(OutDir)"
+xcopy /Y /D "$(ComCoreDir)Msgcore.dll" "$(OutDir)"</Command>
+      <Message>staging COM server + facade + kernel DLLs</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+
+</Project>

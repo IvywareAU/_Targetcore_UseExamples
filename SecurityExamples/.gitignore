@@ -1,0 +1,16 @@
+# Single build output root, shared by both harnesses:
+#   out\<Platform>\<Configuration>\            exes + staged runtime DLLs
+#   out\<Platform>\<Configuration>\obj\<Proj>\ intermediates
+# Pinned in each .vcxproj, and named by run_all.ps1. Replaces the private
+# x64\<Config>\ each harness had while it was a directory of its own.
+#
+# MixConTestAuth provisions its identity and agreement keys into p2p\ BESIDE
+# ITS EXECUTABLE, resolved from GetModuleFileName -- so they land under out\
+# and are ignored with it. That is deliberate and not incidental: a private key
+# is machine-scoped DPAPI material, it is useless anywhere else, and it must
+# never be committed. Delete out\ to re-provision from scratch.
+out/
+
+logs/
+.vs/
+*.user

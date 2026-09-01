@@ -1,0 +1,12 @@
+# Build output, all three produced by build.ps1:
+#   bin\<Configuration>\   the three staged native DLLs (TargetFacade,
+#                          TargetCore, Msgcore), copied so that the loader
+#                          resolves them without touching PATH
+#   out\<Configuration>\   the compiled .class files
+# out\<Configuration> is deleted and recreated on every build.
+bin/
+out/
+
+logs/
+.vs/
+*.user

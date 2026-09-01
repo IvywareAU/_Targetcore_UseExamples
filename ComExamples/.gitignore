@@ -1,0 +1,10 @@
+# Single build output root, shared by all eleven harnesses:
+#   out\<Platform>\<Configuration>\            exes + staged runtime DLLs
+#   out\<Platform>\<Configuration>\obj\<Proj>\ intermediates
+# Pinned in common\Com.props. Replaces the old bin\<Config>\ and
+# obj\<Project>\<Config>\ pair.
+out/
+
+logs/
+.vs/
+*.user

@@ -1,0 +1,86 @@
+# P2Pmsg.cfg -- TargetCore / Msgcore diagnostic output, sample
+#
+# COPY THIS FILE next to the executable you want to configure and rename it to
+# exactly "P2Pmsg.cfg". It is deliberately NOT named that here and is NOT copied
+# to the output directory: the output directory holds more than one example, and
+# a live P2Pmsg.cfg there would silently reconfigure all of them - including
+# NTServiceEventLog.exe, whose whole subject is where its diagnostics go.
+#
+# The library reads the first P2Pmsg.cfg it finds, once and lazily:
+#
+#   1. the path in the P2PMSG_CONFIG environment variable, if set
+#   2. beside the host executable
+#   3. beside Msgcore.dll itself  (a foreign host - a bare JVM under the Panama
+#      bindings, an installer stub - has an executable folder belonging to
+#      somebody else entirely)
+#
+# Encoding: UTF-8, with or without a byte order mark. A UTF-16 file is detected
+# and refused BY NAME rather than parsed into nonsense, because every second
+# byte of one is NUL.
+#
+# Syntax: "Key: Value", one per line. '=' is accepted instead of ':'. Blank
+# lines and lines starting with '#', ';' or '//' are ignored. Keys are
+# case-insensitive, surrounding blanks are trimmed. A key that is not
+# recognised, or a value that cannot be read, is IGNORED and reported through
+# P2Pevent::ConfigDiagnostic() - never guessed at in either direction.
+
+
+# ---------------------------------------------------------------------------
+# ErrToMessageBox -- may a diagnostic become a modal MessageBox?
+#
+#   Accepted: 1 / 0, on / off, yes / no, true / false, enable / disable
+#   Default:  1  (on)
+#
+# THIS SETTING MOVES IN ONE DIRECTION ONLY.
+#
+# 0 is a third way of saying what P2PMSG_NO_UI=1 in the environment and
+# P2Pevent::ForceTextOutput(true) in code already say. 1 merely declines to say
+# it: it cannot cancel either of those, and it cannot override the library's own
+# refusal to raise a dialog where nobody could see one (session 0, or a window
+# station without WSF_VISIBLE - which is a Windows service under the SCM).
+#
+# The reason is not tidiness. MB_TASKMODAL blocks the thread that RAISED the
+# event, events are raised on interior worker threads - a hub's own pump among
+# them - and CloseHub() waits on its pumps without a bound. A dialog nobody can
+# dismiss is not a lost log line; it is a hub that cannot stop. A file dropped
+# beside an executable must not be able to re-arm that.
+#
+# So: setting this to 1 is safe, and setting it to 0 is how you ask for the log
+# file below on a host that COULD have shown a dialog.
+
+ErrToMessageBox: 1
+
+
+# ---------------------------------------------------------------------------
+# LogFile -- where text goes once the library has decided on text
+#
+#   Default: none, which means standard error.
+#            Setting ErrToMessageBox to 0 without naming a LogFile implies
+#            errorLog.txt beside THIS file.
+#
+# A RELATIVE PATH RESOLVES AGAINST THIS FILE'S FOLDER, never the working
+# directory. A service started by the SCM inherits %SystemRoot%\System32 as its
+# working directory, so a bare name resolved against that would try to write
+# into a system folder - which fails unelevated and is vandalism when it
+# succeeds. Resolving against the file that named it puts the log where whoever
+# wrote this configuration was looking. Absolute paths are honoured as given.
+#
+# THIS LOSES TO AN INSTALLED SINK. P2PeerService installs a text sink that
+# routes a hosted hub's diagnostics to the Windows application event log, and a
+# configuration file must not be able to divert those out of the event log. If
+# you are configuring a service and see nothing in this file, that is why - and
+# the event log is the better destination anyway.
+#
+# The file is UTF-8 with no byte order mark on every platform, appended to,
+# opened and closed per entry, and serialised across threads. One entry looks
+# like:
+#
+#     2026-08-17 23:03:56 [ERROR] [svc]module(param=value)
+#         the message
+#         the advice
+#
+# Nothing rotates it. That is deliberate - a diagnostic path that manages files
+# is a diagnostic path with more ways to fail - so point it somewhere your own
+# housekeeping can reach.
+
+LogFile: errorLog.txt

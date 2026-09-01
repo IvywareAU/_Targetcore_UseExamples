@@ -1,0 +1,9 @@
+# Single build output root, matching the C++ trees:
+#   out\x64\<Configuration>\   exes + staged runtime DLLs
+# Set in build.ps1. x64 by construction, not AnyCPU -- see the TARGET note there.
+# Replaces the old bin\<Configuration>\.
+out/
+
+logs/
+.vs/
+*.user
