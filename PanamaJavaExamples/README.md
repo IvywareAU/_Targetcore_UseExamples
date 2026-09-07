@@ -464,12 +464,30 @@ is measured separately at 4 runs in 6, as above.
 
 ### A note on TargetCore's flat C API
 
-These numbers were taken **after** `TargetCore_c.{h,cpp,_u8.cpp}` — the flat
-`extern "C"` / Panama surface — was removed from `TargetCore.dll`. Nothing in
-this tree used it: Java reaches the kernel through the facade's vtables, not
-through that layer, so the 74 symbols it exported were never on this tree's path.
-The removal changed no result here, and the sources are preserved in
-`MSCS_JavaBindings\TargetCore\native\`.
+These numbers were taken **while** `TargetCore_c.{h,cpp,_u8.cpp}` — the flat
+`extern "C"` / Panama surface — was removed from `TargetCore.dll`, and they did
+not move. Nothing in this tree used it: Java reaches the kernel through the
+facade's vtables, not through that layer, so the symbols it exported were never
+on this tree's path.
+
+**It is back in the library, and it is the authoritative copy.**
+`MSCS_JavaBindings` generates its bindings by running jextract over that header,
+so it has to be the one that is compiled — see `TargetCore/CMakeLists.txt`, which
+records the removal and the reversal: *the absence of an in-tree consumer is a
+fact about this repository, not about the API; the consumer is out-of-tree by
+construction, which is what an FFI surface is for.* It exports **101** entry
+points as of 2026-09-08, not the 74 an earlier draft of this note recorded.
+
+Those sources live in `MSCS\TargetCore\`. An earlier draft pointed here instead at
+`MSCS_JavaBindings\TargetCore\native\`, which no longer exists: it held a
+byte-identical second copy, deleted on 2026-08-14 for the reason second copies
+get deleted — the one over there had fallen behind the handle registry, so the
+bindings tree documented a library several fixes older than the one it loaded.
+
+The two Java routes bind different things and neither supersedes the other. This
+tree calls `TargetFacade.dll` vtable slots through hand-transcribed indices;
+`MSCS_JavaBindings` calls `TargetCore.dll` / `Msgcore.dll` flat exports through
+generated bindings checked by an ABI coverage gate.
 
 ## License
 
