@@ -82,20 +82,20 @@ There is no per-project `.sln`; build one harness with MSBuild's `/t:`.
 
 ```
 DirectExamples\
-  DirectExamples(2022).sln        all twelve
-  <Harness>\<Harness>(2022).vcxproj
+  DirectExamples(2026).sln        all twelve
+  <Harness>\<Harness>(2026).vcxproj
   out\x64\{Debug,Release}\                 exes + staged runtime DLLs
   out\x64\{Debug,Release}\obj\<Harness>\   intermediates
 ```
 
 ```powershell
-$msbuild = "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-& $msbuild ".\DirectExamples(2022).sln" /p:Configuration=Debug /p:Platform=x64
-& $msbuild ".\DirectExamples(2022).sln" /t:WsaMeshTest /p:Configuration=Debug /p:Platform=x64
+$msbuild = "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe"
+& $msbuild ".\DirectExamples(2026).sln" /p:Configuration=Debug /p:Platform=x64
+& $msbuild ".\DirectExamples(2026).sln" /t:WsaMeshTest /p:Configuration=Debug /p:Platform=x64
 .\out\x64\Debug\WsaMeshTest.exe
 ```
 
-x64 only, `v143`, `stdcpp17`, `UseOfMfc=Dynamic`, Unicode. Configurations are
+x64 only, `v145`, `stdcpp17`, `UseOfMfc=Dynamic`, Unicode. Configurations are
 `Debug` and `Release`; there is no static-link shape here.
 
 [`run_all.ps1`](run_all.ps1) builds the tree and runs every harness that *can* be

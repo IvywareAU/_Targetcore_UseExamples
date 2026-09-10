@@ -9,7 +9,7 @@ Same questions, same verdicts, same exit-code contract as
 side by side.
 
 ```
-msbuild "ComExamples(2022).sln" -p:Configuration=Debug -p:Platform=x64
+msbuild "ComExamples(2026).sln" -p:Configuration=Debug -p:Platform=x64
 .\run_all.ps1 -IncludeScripts         # register per-user, run everything, unregister
 .\run_all.ps1 -Config Release -IncludeScripts
 ```

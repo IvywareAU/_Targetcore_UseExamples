@@ -160,11 +160,11 @@ as C++17.
 
 ## Build configuration
 
-Both projects are registered in `DirectExamples(2022).sln` and set to build in both
+Both projects are registered in `DirectExamples(2026).sln` and set to build in both
 solution configurations. Their settings are uniform with the rest of the tree:
 
 - `ConfigurationType` Application, `UseOfMfc` **Dynamic**, `CharacterSet` Unicode
-- `PlatformToolset` v143, `LanguageStandard` `stdcpp17`, x64 only
+- `PlatformToolset` v145, `LanguageStandard` `stdcpp17`, x64 only
 - `/DELAYLOAD:TargetCore.dll` plus `..\..\..\vsutils\DelayLoadReport.cpp` compiled in
 - output to the shared `out\$(Platform)\$(Configuration)\` tree at the repository root
 - post-build step stages `Msgcore.dll` / `TargetCore.dll` from `..\..\..\bin\$(Configuration)64\`
@@ -197,6 +197,9 @@ on its own, and the `CWinApp` global is not required for the extension DLL to in
 ## Verified build and run results
 
 Toolchain: MSBuild 17.14.51.32402, Visual Studio 2022 Community, `v143`, x64.
+These results predate the move to Visual Studio 2026 / `v145` and have NOT been
+re-measured on it. The project files in this repository now build at `v145`, so
+the table below records what a v143 build did, not what the current one does.
 Kernel DLLs staged from the prebuilt `MSCS\bin\Debug64` and `MSCS\bin\Release64`.
 
 ### Builds — 4 of 4 clean

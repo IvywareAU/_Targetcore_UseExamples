@@ -61,7 +61,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
-$sln  = Join-Path $root 'ErrorReportingExamples(2022).sln'
+$sln  = Join-Path $root 'ErrorReportingExamples(2026).sln'
 $exe  = Join-Path $root ("out\x64\{0}\NTServiceEventLog.exe" -f $Config)
 $exe2 = Join-Path $root ("out\x64\{0}\DialogOrLogFile.exe"   -f $Config)
 

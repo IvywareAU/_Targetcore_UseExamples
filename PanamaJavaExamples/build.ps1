@@ -63,7 +63,7 @@ $src = Join-Path $here "..\..\TargetFacade\out\x64\$Config"
 $bin = Join-Path $here "bin\$Config"
 
 if (-not (Test-Path $src)) {
-    throw "TargetFacade $Config build not found at $src. Build TargetFacade(2022).sln first."
+    throw "TargetFacade $Config build not found at $src. Build TargetFacade(2026).sln first."
 }
 New-Item -ItemType Directory -Force -Path $bin | Out-Null
 

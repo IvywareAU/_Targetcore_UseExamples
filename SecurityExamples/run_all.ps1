@@ -88,7 +88,7 @@ if (-not $NoBuild) {
     }
 
     Write-Host "building $Config|x64 ..."
-    & $msbuild (Join-Path $here 'SecurityExamples(2022).sln') `
+    & $msbuild (Join-Path $here 'SecurityExamples(2026).sln') `
         -p:Configuration=$Config -p:Platform=x64 -v:minimal -nologo -m |
         Where-Object { $_ -match 'error|warning C' }
     if ($LASTEXITCODE -ne 0) {

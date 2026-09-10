@@ -13,9 +13,9 @@ in all five, deliberately, so a disagreement between two trees is a finding.
 
 | Tree | Language | Reaches TargetCore through | Built by |
 | --- | --- | --- | --- |
-| [`DirectExamples`](DirectExamples) | C++ | `TargetCore.lib` and MFC — the C++ classes themselves | `DirectExamples(2022).sln` |
-| [`FacadeExamples`](FacadeExamples) | C++ | `TargetFacade.dll`, a macro-free flat-vtable facade | `FacadeExamples(2022).sln` |
-| [`ComExamples`](ComExamples) | C++ (+ PowerShell, VBScript) | `TargetCom`, an ATL dual-interface COM server over the facade | `ComExamples(2022).sln` |
+| [`DirectExamples`](DirectExamples) | C++ | `TargetCore.lib` and MFC — the C++ classes themselves | `DirectExamples(2026).sln` |
+| [`FacadeExamples`](FacadeExamples) | C++ | `TargetFacade.dll`, a macro-free flat-vtable facade | `FacadeExamples(2026).sln` |
+| [`ComExamples`](ComExamples) | C++ (+ PowerShell, VBScript) | `TargetCom`, an ATL dual-interface COM server over the facade | `ComExamples(2026).sln` |
 | [`dotNetExamples`](dotNetExamples) | C# | the same COM server, by vtable and late-bound | `build.ps1` (Roslyn `csc`) |
 | [`PanamaJavaExamples`](PanamaJavaExamples) | Java | the facade's raw vtables, through Panama FFI — no JNI, no jextract | `build.ps1` (`javac`) |
 
@@ -32,8 +32,8 @@ reading either against `DirectExamples` tells you nothing about bindings.
 
 | Tree | Language | Subject | Built by |
 | --- | --- | --- | --- |
-| [`ErrorReportingExamples`](ErrorReportingExamples) | C++ | where a diagnostic **goes** — and why, in a host with nowhere to put one, that decides whether a hub can stop at all | `ErrorReportingExamples(2022).sln` |
-| [`SecurityExamples`](SecurityExamples) | C++ | the **posture** a hub runs in: one mixed-transport claim made twice, with the security defaults opted out and then provisioned | `SecurityExamples(2022).sln` |
+| [`ErrorReportingExamples`](ErrorReportingExamples) | C++ | where a diagnostic **goes** — and why, in a host with nowhere to put one, that decides whether a hub can stop at all | `ErrorReportingExamples(2026).sln` |
+| [`SecurityExamples`](SecurityExamples) | C++ | the **posture** a hub runs in: one mixed-transport claim made twice, with the security defaults opted out and then provisioned | `SecurityExamples(2026).sln` |
 
 ---
 

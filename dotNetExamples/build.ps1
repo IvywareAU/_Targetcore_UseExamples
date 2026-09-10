@@ -122,7 +122,7 @@ $stage = @(
 
 foreach ($dll in $stage) {
     if (-not (Test-Path $dll)) {
-        throw "missing $dll`nBuild TargetFacade\TargetFacade(2022).sln for $Config|x64 first."
+        throw "missing $dll`nBuild TargetFacade\TargetFacade(2026).sln for $Config|x64 first."
     }
     Copy-Item $dll $bin -Force
 }

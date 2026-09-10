@@ -65,7 +65,7 @@ Request vs. response is told apart purely by the message **source address** (bot
 
 ## Verified result (runtime)
 
-Built with MSBuild (`Debug|x64`, VS2022 v143), run headless — **exit code 0 (PASS)**. Trace excerpt
+Built with MSBuild (`Debug|x64`, VS2026 v145), run headless — **exit code 0 (PASS)**. Trace excerpt
 (note the two distinct con pointers HubA owns, then the request/response over each transport):
 
 ```
@@ -169,7 +169,7 @@ The tree's [`run_all.ps1`](../run_all.ps1) builds and runs this and its sibling 
 the ordinary way in. To drive this one alone:
 
 ```
-msbuild "MixConTest(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "MixConTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 # run: ..\out\x64\Debug\MixConTest.exe
 ```
 

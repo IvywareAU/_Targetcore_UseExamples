@@ -34,7 +34,7 @@
     <McsBinRoot>$(MSBuildThisFileDirectory)..\..\..\bin\</McsBinRoot>
     <LightCoreDir Condition="'$(Configuration)'=='Debug'">$(McsBinRoot)Debug64\</LightCoreDir>
     <LightCoreDir Condition="'$(Configuration)'=='Release'">$(McsBinRoot)Release64\</LightCoreDir>
-    <!-- Artifact names carry no "(2022)" and no debug "d" any more: only the
+    <!-- Artifact names carry no "(2026)" and no debug "d" any more: only the
          DIRECTORY keeps Debug and Release apart, as everywhere else in this
          tree.  (TargetFacade dropped both suffixes; the kernel never had
          them in ..\..\bin.)  The LightSuffix property is gone with them. -->

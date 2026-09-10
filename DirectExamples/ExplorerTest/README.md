@@ -9,7 +9,7 @@ an **expump** on the server hub, and a client that speaks `P2PexpumpCtrl` to
 it.
 
 ```
-msbuild "ExplorerTest(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "ExplorerTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 ..\out\x64\Debug\ExplorerTest.exe [port]        # default 7823
 ```
 
@@ -138,7 +138,7 @@ step stages both DLLs and fails loudly if `TargetCore.dll` is missing, because
 it is delay-loaded and the alternative is `0xC06D007E` at startup.
 
 ```
-msbuild "..\..\..\TargetCore\TargetCore(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "..\..\..\TargetCore\TargetCore(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 ```
 
 ## Relation to the other harnesses

@@ -1,0 +1,84 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.9.12120.119
+MinimumVisualStudioVersion = 10.0.40219.1
+# Copyright © 2026 Khrustal & Mann
+#              MELBOURNE, VICTORIA, AUSTRALIA, 3000
+# Licensed under the Apache License, Version 2.0. See LICENSE for the full text.
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlexInteropLight", "AlexInterop\AlexInteropLight(2026).vcxproj", "{A520328F-220D-4F78-BDD7-2747B8C69E30}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlexTestLight", "AlexTest\AlexTestLight(2026).vcxproj", "{45850F71-6301-4112-BC92-437742C7ABED}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Com232MeshTestLight", "Com232MeshTest\Com232MeshTestLight(2026).vcxproj", "{072823A1-76C3-4A70-9CA2-B4ABFF5300E8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DmxMeshTestLight", "DmxMeshTest\DmxMeshTestLight(2026).vcxproj", "{C95725FB-6A7F-43CB-824B-5859752570AD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LocalInMemoryTestLight", "LocalInMemoryTest\LocalInMemoryTestLight(2026).vcxproj", "{32FF1734-1A7F-427E-83DE-AB26C5315EB7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PipeMeshTestLight", "PipeMeshTest\PipeMeshTestLight(2026).vcxproj", "{2355B5C5-F769-4239-B272-2D74C508A4E4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PipeMsgFactoryTestLight", "PipeMsgFactoryTest\PipeMsgFactoryTestLight(2026).vcxproj", "{482DEF1B-F68B-42BC-B19F-81F5D4B841B3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PipeMsgMapTestLight", "PipeMsgMapTest\PipeMsgMapTestLight(2026).vcxproj", "{223C670C-FD7B-4494-930E-9D41F4690873}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RouteLoopbackTestLight", "RouteLoopbackTest\RouteLoopbackTestLight(2026).vcxproj", "{6E63AD2D-5D5F-44E4-9D0C-A20A7C0FB8A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TwoConTestLight", "TwoConTest\TwoConTestLight(2026).vcxproj", "{090AD7DD-C7B3-4814-946F-1AE92146E6F5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WsaMeshTestLight", "WsaMeshTest\WsaMeshTestLight(2026).vcxproj", "{48336D62-2122-4677-95DE-3910B9E1218C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A520328F-220D-4F78-BDD7-2747B8C69E30}.Debug|x64.ActiveCfg = Debug|x64
+		{A520328F-220D-4F78-BDD7-2747B8C69E30}.Debug|x64.Build.0 = Debug|x64
+		{A520328F-220D-4F78-BDD7-2747B8C69E30}.Release|x64.ActiveCfg = Release|x64
+		{A520328F-220D-4F78-BDD7-2747B8C69E30}.Release|x64.Build.0 = Release|x64
+		{45850F71-6301-4112-BC92-437742C7ABED}.Debug|x64.ActiveCfg = Debug|x64
+		{45850F71-6301-4112-BC92-437742C7ABED}.Debug|x64.Build.0 = Debug|x64
+		{45850F71-6301-4112-BC92-437742C7ABED}.Release|x64.ActiveCfg = Release|x64
+		{45850F71-6301-4112-BC92-437742C7ABED}.Release|x64.Build.0 = Release|x64
+		{072823A1-76C3-4A70-9CA2-B4ABFF5300E8}.Debug|x64.ActiveCfg = Debug|x64
+		{072823A1-76C3-4A70-9CA2-B4ABFF5300E8}.Debug|x64.Build.0 = Debug|x64
+		{072823A1-76C3-4A70-9CA2-B4ABFF5300E8}.Release|x64.ActiveCfg = Release|x64
+		{072823A1-76C3-4A70-9CA2-B4ABFF5300E8}.Release|x64.Build.0 = Release|x64
+		{C95725FB-6A7F-43CB-824B-5859752570AD}.Debug|x64.ActiveCfg = Debug|x64
+		{C95725FB-6A7F-43CB-824B-5859752570AD}.Debug|x64.Build.0 = Debug|x64
+		{C95725FB-6A7F-43CB-824B-5859752570AD}.Release|x64.ActiveCfg = Release|x64
+		{C95725FB-6A7F-43CB-824B-5859752570AD}.Release|x64.Build.0 = Release|x64
+		{32FF1734-1A7F-427E-83DE-AB26C5315EB7}.Debug|x64.ActiveCfg = Debug|x64
+		{32FF1734-1A7F-427E-83DE-AB26C5315EB7}.Debug|x64.Build.0 = Debug|x64
+		{32FF1734-1A7F-427E-83DE-AB26C5315EB7}.Release|x64.ActiveCfg = Release|x64
+		{32FF1734-1A7F-427E-83DE-AB26C5315EB7}.Release|x64.Build.0 = Release|x64
+		{2355B5C5-F769-4239-B272-2D74C508A4E4}.Debug|x64.ActiveCfg = Debug|x64
+		{2355B5C5-F769-4239-B272-2D74C508A4E4}.Debug|x64.Build.0 = Debug|x64
+		{2355B5C5-F769-4239-B272-2D74C508A4E4}.Release|x64.ActiveCfg = Release|x64
+		{2355B5C5-F769-4239-B272-2D74C508A4E4}.Release|x64.Build.0 = Release|x64
+		{482DEF1B-F68B-42BC-B19F-81F5D4B841B3}.Debug|x64.ActiveCfg = Debug|x64
+		{482DEF1B-F68B-42BC-B19F-81F5D4B841B3}.Debug|x64.Build.0 = Debug|x64
+		{482DEF1B-F68B-42BC-B19F-81F5D4B841B3}.Release|x64.ActiveCfg = Release|x64
+		{482DEF1B-F68B-42BC-B19F-81F5D4B841B3}.Release|x64.Build.0 = Release|x64
+		{223C670C-FD7B-4494-930E-9D41F4690873}.Debug|x64.ActiveCfg = Debug|x64
+		{223C670C-FD7B-4494-930E-9D41F4690873}.Debug|x64.Build.0 = Debug|x64
+		{223C670C-FD7B-4494-930E-9D41F4690873}.Release|x64.ActiveCfg = Release|x64
+		{223C670C-FD7B-4494-930E-9D41F4690873}.Release|x64.Build.0 = Release|x64
+		{6E63AD2D-5D5F-44E4-9D0C-A20A7C0FB8A3}.Debug|x64.ActiveCfg = Debug|x64
+		{6E63AD2D-5D5F-44E4-9D0C-A20A7C0FB8A3}.Debug|x64.Build.0 = Debug|x64
+		{6E63AD2D-5D5F-44E4-9D0C-A20A7C0FB8A3}.Release|x64.ActiveCfg = Release|x64
+		{6E63AD2D-5D5F-44E4-9D0C-A20A7C0FB8A3}.Release|x64.Build.0 = Release|x64
+		{090AD7DD-C7B3-4814-946F-1AE92146E6F5}.Debug|x64.ActiveCfg = Debug|x64
+		{090AD7DD-C7B3-4814-946F-1AE92146E6F5}.Debug|x64.Build.0 = Debug|x64
+		{090AD7DD-C7B3-4814-946F-1AE92146E6F5}.Release|x64.ActiveCfg = Release|x64
+		{090AD7DD-C7B3-4814-946F-1AE92146E6F5}.Release|x64.Build.0 = Release|x64
+		{48336D62-2122-4677-95DE-3910B9E1218C}.Debug|x64.ActiveCfg = Debug|x64
+		{48336D62-2122-4677-95DE-3910B9E1218C}.Debug|x64.Build.0 = Debug|x64
+		{48336D62-2122-4677-95DE-3910B9E1218C}.Release|x64.ActiveCfg = Release|x64
+		{48336D62-2122-4677-95DE-3910B9E1218C}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

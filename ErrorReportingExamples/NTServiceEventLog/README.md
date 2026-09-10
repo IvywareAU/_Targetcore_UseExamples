@@ -114,7 +114,7 @@ startup. For this example the DLL matters twice over: it also carries the
 message table that `EventMessageFile` points at.
 
 ```
-msbuild "ErrorReportingExamples(2022).sln" -p:Configuration=Debug -p:Platform=x64
+msbuild "ErrorReportingExamples(2026).sln" -p:Configuration=Debug -p:Platform=x64
 ```
 
 > If the events you get are unformatted **and** you registered the source, check

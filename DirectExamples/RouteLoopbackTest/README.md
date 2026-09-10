@@ -74,11 +74,11 @@ repository this tree does not vendor. Build the native libs there first:
 <treehub-runtime-repo>\native\build.ps1 -NoTest -Config Release  # Release
 ```
 
-Then open the tree-wide `..\DirectExamples(2022).sln` in Visual Studio 2022
-(v143, x64), or from a VS developer prompt:
+Then open the tree-wide `..\DirectExamples(2026).sln` in Visual Studio 2026
+(v145, x64), or from a VS developer prompt:
 
 ```
-msbuild "RouteLoopbackTest(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "RouteLoopbackTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 ..\out\x64\Debug\RouteLoopbackTest.exe
 ```
 

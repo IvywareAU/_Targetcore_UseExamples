@@ -139,7 +139,7 @@ is the ordinary way in. `-Fresh` deletes `p2p\` first, so the **create** path is
 than the find path — see below. To drive this one alone:
 
 ```
-msbuild "MixConTestAuth(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "MixConTestAuth(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 # run: ..\out\x64\Debug\MixConTestAuth.exe   (keys land beside it, in p2p\)
 ```
 

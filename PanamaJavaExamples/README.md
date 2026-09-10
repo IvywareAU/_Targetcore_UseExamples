@@ -328,7 +328,7 @@ own, no `/DELAYLOAD` linkage, and loads the DLL from a JIT-compiled thread long
 after startup. **It works** — first run, no special flags:
 
 ```
-[02:52:22.960 tid=1  MAIN]   facade : TargetFacade ABI 10 / TargetCore(2022)
+[02:52:22.960 tid=1  MAIN]   facade : TargetFacade ABI 10 / TargetCore(2026)
 [02:52:23.024 tid=21 SERVER] peer up   : WsaMesh.Client
 [02:52:23.025 tid=22 CLIENT] peer up   : WsaMesh.Server - loopback TCP connection ready
 ```
@@ -437,7 +437,7 @@ a source list is the whole build, and adding a build tool would only obscure tha
 ## Verified results
 
 Toolchain: JDK 23.0.2 (Temurin 23.0.2+7-58), `javac 23.0.2`, x64.
-Facade: `TargetFacade ABI 10 / TargetCore(2022)`, staged from
+Facade: `TargetFacade ABI 10 / TargetCore(2026)`, staged from
 `TargetFacade\out\x64\<Config>`.
 
 | Harness | Debug | Release |

@@ -7,7 +7,7 @@ Same questions, same verdicts, same exit-code contract — so the two trees can 
 read side by side. What changes is how much you have to know to ask the question.
 
 ```
-msbuild "FacadeExamples(2022).sln" -p:Configuration=Debug -p:Platform=x64
+msbuild "FacadeExamples(2026).sln" -p:Configuration=Debug -p:Platform=x64
 .\run_all.ps1                       # build + run everything, summarise
 .\run_all.ps1 -Config Release
 ```

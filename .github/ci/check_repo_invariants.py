@@ -111,7 +111,7 @@ class Tree:
 # two while each tree was a repository of its own.
 TREES = [
     Tree(
-        "DirectExamples", "DirectExamples(2022).sln",
+        "DirectExamples", "DirectExamples(2026).sln",
         ["README.md", "run_all.ps1", "About.md"],
         {r"..\..\..\vsutils\DelayLoadReport.cpp"},
         {
@@ -136,7 +136,7 @@ TREES = [
     # protects against is a project file quietly acquiring a new outward path,
     # and that risk does not care why a tree exists.
     Tree(
-        "ErrorReportingExamples", "ErrorReportingExamples(2022).sln",
+        "ErrorReportingExamples", "ErrorReportingExamples(2026).sln",
         ["README.md", "run_all.ps1"],
         {r"..\..\..\vsutils\DelayLoadReport.cpp"},
         {
@@ -157,7 +157,7 @@ TREES = [
     # every `..\..\` that had to become `..\..\..\` is checked here rather
     # than left to fail as LNK1181 on somebody's machine.
     Tree(
-        "SecurityExamples", "SecurityExamples(2022).sln",
+        "SecurityExamples", "SecurityExamples(2026).sln",
         ["README.md", "run_all.ps1"],
         {r"..\..\..\vsutils\DelayLoadReport.cpp"},
         {
@@ -172,7 +172,7 @@ TREES = [
     # files at all: every outward path is a property defined once in
     # common\*.props, which is what check [4] pins.
     Tree(
-        "FacadeExamples", "FacadeExamples(2022).sln",
+        "FacadeExamples", "FacadeExamples(2026).sln",
         ["README.md", "run_all.ps1"],
         set(), set(),
         # A raw string cannot end in a backslash, hence the doubled ones.
@@ -183,7 +183,7 @@ TREES = [
         },
     ),
     Tree(
-        "ComExamples", "ComExamples(2022).sln",
+        "ComExamples", "ComExamples(2026).sln",
         ["README.md", "run_all.ps1"],
         set(), set(),
         props_paths={

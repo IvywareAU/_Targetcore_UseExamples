@@ -1,6 +1,6 @@
 # AlexTest — P2P Messaging Demo
 
-A minimal Visual Studio 2022 console application that demonstrates peer-to-peer TCP/IP messaging using the **TargetCore** kernel library.
+A minimal Visual Studio 2026 console application that demonstrates peer-to-peer TCP/IP messaging using the **TargetCore** kernel library.
 
 ---
 
@@ -17,7 +17,7 @@ No configuration files or shared state required. Start the server first, then ru
 
 ## Building
 
-Open the tree-wide **`..\DirectExamples(2022).sln`** in Visual Studio 2022, select the
+Open the tree-wide **`..\DirectExamples(2026).sln`** in Visual Studio 2026, select the
 **AlexTest** project, and build **Debug | x64** or **Release | x64**.
 Both configurations are supported and produce a runnable exe:
 
@@ -204,8 +204,8 @@ To avoid the timing conflict, the project links `TargetCore` with `/DELAYLOAD`, 
 
 ```
 AlexTest\
-  AlexTest(2022).vcxproj      Project: Console | MFC Dynamic | Unicode | x64
-  AlexTest(2022).vcxproj.filters
+  AlexTest(2026).vcxproj      Project: Console | MFC Dynamic | Unicode | x64
+  AlexTest(2026).vcxproj.filters
   Targetver.h                 Windows 10 SDK target
   stdafx.h / stdafx.cpp       Precompiled header (MFC + WinSock2)
   AlexTest.h                  Forward declarations

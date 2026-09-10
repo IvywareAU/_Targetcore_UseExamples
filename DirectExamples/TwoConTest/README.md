@@ -37,7 +37,7 @@ source, `1` = setup failure.
 
 ## Verified result (runtime)
 
-Built with MSBuild (`Debug|x64`, VS2022 v143) and run headless — **exit code 0 (PASS)**. The trace
+Built with MSBuild (`Debug|x64`, VS2026 v145) and run headless — **exit code 0 (PASS)**. The trace
 shows one hub concurrently driving **three** `P2PeerCon` objects (note the distinct `con=` pointers):
 
 ```
@@ -61,7 +61,7 @@ The project references the sibling `Msgcore` and `TargetCore` projects (`..\..\l
 `..\..\Msgcore` / `..\..\TargetCore` for headers), mirroring `AlexTest`.
 
 ```
-msbuild "TwoConTest(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "TwoConTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 # run: x64\Debug\TwoConTest.exe   (needs TargetCore.dll + Msgcore.dll beside it)
 ```
 

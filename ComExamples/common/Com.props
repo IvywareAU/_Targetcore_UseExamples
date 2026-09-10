@@ -38,7 +38,7 @@
     <McsBinRoot>$(MSBuildThisFileDirectory)..\..\..\bin\</McsBinRoot>
     <ComCoreDir Condition="'$(Configuration)'=='Debug'">$(McsBinRoot)Debug64\</ComCoreDir>
     <ComCoreDir Condition="'$(Configuration)'=='Release'">$(McsBinRoot)Release64\</ComCoreDir>
-    <!-- Artifact names carry no "(2022)" and no debug "d" any more: only the
+    <!-- Artifact names carry no "(2026)" and no debug "d" any more: only the
          DIRECTORY keeps Debug and Release apart, as everywhere else in this
          tree.  The ComSuffix property is gone with them. -->
     <!-- MIDL output of TargetCom: TargetCom_h.h + TargetCom_i.c. It lives in

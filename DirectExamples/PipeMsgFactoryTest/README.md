@@ -84,13 +84,13 @@ Mirrors `PipeMsgMapTest` (same `..\..\..\lib` import libs, `..\..\..\Msgcore` / 
 headers, no `/DELAYLOAD` because `BEGIN_P2PeerMsg_MAP` imports a data symbol).
 
 ```
-msbuild "PipeMsgFactoryTest(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "PipeMsgFactoryTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 # run: x64\Debug\PipeMsgFactoryTest.exe
 ```
 
 ## Verified result (runtime)
 
-Built with MSBuild (`Debug|x64`, VS2022 v143) and run headless — **exit code 0 (PASS)**:
+Built with MSBuild (`Debug|x64`, VS2026 v145) and run headless — **exit code 0 (PASS)**:
 
 ```
 [CLIENT] Posted 'HubPing' -> 'MsgFac.Server' (RedirectFactory): "Ping: hello Server, this is Client via RedirectFactory."

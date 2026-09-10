@@ -126,7 +126,7 @@ path is covered too. Run it both ways at least once.
 .\run_all.ps1 -Fresh             # re-provision from scratch
 ```
 
-`run_all.ps1` builds `SecurityExamples(2022).sln`, runs both harnesses, prints a
+`run_all.ps1` builds `SecurityExamples(2026).sln`, runs both harnesses, prints a
 verdict table and **exits with the number of failures**. Neither harness is
 interactive and neither needs elevation, so — unlike `DirectExamples` and
 `ErrorReportingExamples` — nothing in this tree has to be skipped.

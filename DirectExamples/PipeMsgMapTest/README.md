@@ -97,7 +97,7 @@ Mirrors `PipeMeshTest`: references the sibling `Msgcore` / `TargetCore` projects
 (`..\..\..\lib` for import libs, `..\..\..\Msgcore` / `..\..\..\TargetCore` for headers).
 
 ```
-msbuild "PipeMsgMapTest(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "PipeMsgMapTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 # run: x64\Debug\PipeMsgMapTest.exe
 ```
 
@@ -109,7 +109,7 @@ msbuild "PipeMsgMapTest(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
 
 ## Verified result (runtime)
 
-Built with MSBuild (`Debug|x64`, VS2022 v143) and run headless — **exit code 0 (PASS)**:
+Built with MSBuild (`Debug|x64`, VS2026 v145) and run headless — **exit code 0 (PASS)**:
 
 ```
 [CLIENT] Posted 'HubPing' -> 'MsgMap.Server': "Ping: hello Server, this is Client over a named pipe."

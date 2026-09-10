@@ -1,11 +1,11 @@
 # Where the COM interface dependency lives
 
 Across all eleven COM harnesses in this tree, the dependency on TargetCom is
-**not** in any harness project. Every `<Harness>\<Harness>Com(2022).vcxproj`
+**not** in any harness project. Every `<Harness>\<Harness>Com(2026).vcxproj`
 contains nothing but its one `.cpp` and an import of the shared property sheet:
 
 ```xml
-<!-- AlexTest\AlexTestCom(2022).vcxproj:37 -->
+<!-- AlexTest\AlexTestCom(2026).vcxproj:37 -->
 <Import Project="..\common\Com.props" />
 ```
 
@@ -53,7 +53,7 @@ No harness `.cpp` includes a COM header directly. They all include
 |---|---|
 | `common\Com.props:57` | the only libraries are `ole32.lib;oleaut32.lib;uuid.lib`. No `TargetFacade.lib`, no `TargetCore.lib`, no project `.lib` at all |
 | `common\ComHarness.h:518` | `CoCreateInstance(CLSID_P2PNetwork, NULL, CLSCTX_INPROC_SERVER, IID_IP2PNetworkCom, ...)` — the implementation is found in `HKCU\Software\Classes` |
-| `run_all.ps1:50-52` | registers the **staged** `bin\<Config>\TargetCom(2022)[d].dll` with `regsvr32 /s /n /i:user` |
+| `run_all.ps1:50-52` | registers the **staged** `bin\<Config>\TargetCom(2026)[d].dll` with `regsvr32 /s /n /i:user` |
 | `run_all.ps1:104` | unregisters it again |
 | `script\ps_client.ps1:46` | `New-Object -ComObject TargetCom.P2PNetwork` — ProgID only |
 | `script\vbs_client.vbs:46` | `CreateObject("TargetCom.P2PNetwork")` — ProgID only |
@@ -69,7 +69,7 @@ run       ->  HKCU\Software\Classes            (CoCreateInstance / ProgID)
 
 ## The implicit dependency worth flagging
 
-`ComExamples(2022).sln` lists only the eleven harness projects. There is
+`ComExamples(2026).sln` lists only the eleven harness projects. There is
 **no `ProjectReference` to TargetCom.** The include path at `Com.props:28`
 points into another tree's build output, so if `TargetFacade\com` has not been
 built for that exact configuration, the harnesses fail at
@@ -155,29 +155,29 @@ still gets a working link, which is the point of making it a success code.
 ## Two constraints that actually bite
 
 **Bitness.** An in-proc server can only be loaded by a caller of its own
-bitness, so both are now built. `TargetCom(2022).vcxproj` and
-`TargetFacade(2022).vcxproj` each carry four configurations —
+bitness, so both are now built. `TargetCom(2026).vcxproj` and
+`TargetFacade(2026).vcxproj` each carry four configurations —
 `Debug|x64`, `Release|x64`, `Debug|Win32`, `Release|Win32` — and
-`TargetFacade(2022).sln` exposes all four (the two smoke-test projects stay
+`TargetFacade(2026).sln` exposes all four (the two smoke-test projects stay
 x64-only and are skipped in a `Win32` solution build).
 
 ```
-msbuild "TargetFacade(2022).sln" -p:Configuration=Debug -p:Platform=x64     # 64-bit callers
-msbuild "TargetFacade(2022).sln" -p:Configuration=Debug -p:Platform=Win32   # 32-bit callers
+msbuild "TargetFacade(2026).sln" -p:Configuration=Debug -p:Platform=x64     # 64-bit callers
+msbuild "TargetFacade(2026).sln" -p:Configuration=Debug -p:Platform=Win32   # 32-bit callers
 ```
 
 **Build the kernel first, and mind the platform NAME.** The facade solution
-calls 32-bit `Win32`; `TargetCore(2022).sln` calls it **`x86`** (mapping to the
+calls 32-bit `Win32`; `TargetCore(2026).sln` calls it **`x86`** (mapping to the
 project's `Win32`). Passing `-p:Platform=Win32` to the kernel solution fails
 with MSB4126 and reads like "there is no 32-bit build", which is not what it
 means:
 
 ```
-msbuild "TargetCore(2022).sln" -p:Configuration=Debug -p:Platform=x86        # NOT Win32
+msbuild "TargetCore(2026).sln" -p:Configuration=Debug -p:Platform=x86        # NOT Win32
 ```
 
 The kernel has to go first because it is what produces
-`lib\Win32\TargetCore(2022)*.lib`. Without it the facade fails at
+`lib\Win32\TargetCore(2026)*.lib`. Without it the facade fails at
 `LNK1104: cannot open file 'TargetCore.lib'` — and only on a *clean*
 build, because an incremental one happily reuses the previous link. If the
 32-bit chain looks fine, confirm it with `-t:Rebuild` before believing it.

@@ -44,11 +44,11 @@ client BCast `→` server `On_P2PeerBCast`.
 
 ## Build & run
 
-Open the tree-wide `..\DirectExamples(2022).sln` in Visual Studio 2022 (v143,
+Open the tree-wide `..\DirectExamples(2026).sln` in Visual Studio 2026 (v145,
 x64 Debug) and build this project, or from a VS developer prompt:
 
 ```
-msbuild "DmxMeshTest(2022).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "DmxMeshTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 x64\Debug\DmxMeshTest.exe
 ```
 
