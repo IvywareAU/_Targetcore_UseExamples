@@ -428,24 +428,24 @@ int main(int argc, char* argv[])
 
             // ---- 2. QHub: ask once ---------------------------------------
             LogAt(L"MAIN", L"--- QHub: ask the hub what it is ---");
-            oClient.SendCommand(_N("QHub"), FALSE, _T("ExplorerTest one-shot query"));
+            oClient.SendCommand(L"QHub", FALSE, _T("ExplorerTest one-shot query"));
             const bool bAnswer1 = WaitForAnswers(1, 10000);
             const int  nNodes1  = g_nNodesLast;
 
             // ---- 3. QHub@Dsc: the qualifier the hub answer ignores --------
             LogAt(L"MAIN", L"--- QHub@Dsc: the same question, verbosely ---");
-            oClient.SendCommand(_N("QHub"), TRUE, _T("ExplorerTest verbose query"));
+            oClient.SendCommand(L"QHub", TRUE, _T("ExplorerTest verbose query"));
             const bool bAnswer2 = WaitForAnswers(2, 10000);
             const int  nNodes2  = g_nNodesLast;
 
             // ---- 4. RHub: answer AND register as a standing sink ----------
             LogAt(L"MAIN", L"--- RHub: register as a hub-status sink ---");
-            oClient.SendCommand(_N("RHub"), FALSE, _T("ExplorerTest sink registration"));
+            oClient.SendCommand(L"RHub", FALSE, _T("ExplorerTest sink registration"));
             const bool bAnswer3 = WaitForAnswers(3, 10000);
 
             // ---- 5. DHub: de-register; nothing should come back -----------
             LogAt(L"MAIN", L"--- DHub: de-register (no answer is the correct answer) ---");
-            oClient.SendCommand(_N("DHub"), FALSE, _T("ExplorerTest de-registration"));
+            oClient.SendCommand(L"DHub", FALSE, _T("ExplorerTest de-registration"));
             Sleep(1500);
             const bool bQuietAfterDHub = (InterlockedExchangeAdd(&g_nAnswers, 0) == 3);
 
