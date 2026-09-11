@@ -77,7 +77,7 @@ New-Item -ItemType Directory -Force -Path $logs | Out-Null
 $single = @(
     'WsaMeshTest', 'PipeMeshTest', 'DmxMeshTest', 'Com232MeshTest',
     'LocalInMemoryTest', 'PipeMsgMapTest', 'PipeMsgFactoryTest',
-    'TwoConTest', 'ExplorerTest', 'RouteLoopbackTest'
+    'TwoConTest', 'ExplorerTest', 'LoginAckDomainTest', 'RouteLoopbackTest'
 )
 
 # The only project allowed to be absent without that being a build failure.
