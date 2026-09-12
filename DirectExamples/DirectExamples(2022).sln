@@ -1,0 +1,94 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37216.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+# Copyright © 2026 Khrustal & Mann
+#              MELBOURNE, VICTORIA, AUSTRALIA, 3000
+# Licensed under the Apache License, Version 2.0. See LICENSE for the full text.
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlexInterop", "AlexInterop\AlexInterop(2022).vcxproj", "{A1E20F3C-9D44-4C11-B2A7-7E1F0C2D3E88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlexTest", "AlexTest\AlexTest(2022).vcxproj", "{B5C3A4E1-2F7D-4891-8D6E-1A2B3C4D5E6F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Com232MeshTest", "Com232MeshTest\Com232MeshTest(2022).vcxproj", "{D3E4F5A6-B7C8-4901-8A2B-3C4D5E6F7083}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DmxMeshTest", "DmxMeshTest\DmxMeshTest(2022).vcxproj", "{EEED090C-DF51-447C-A089-C9625F3DF1BB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExplorerTest", "ExplorerTest\ExplorerTest(2022).vcxproj", "{9A4E71D6-5C83-4F27-B0A1-6D8E2F3C4A59}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LocalInMemoryTest", "LocalInMemoryTest\LocalInMemoryTest(2022).vcxproj", "{A1B2C3D4-E5F6-4708-9A0B-1C2D3E4F5061}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PipeMeshTest", "PipeMeshTest\PipeMeshTest(2022).vcxproj", "{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F70}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PipeMsgFactoryTest", "PipeMsgFactoryTest\PipeMsgFactoryTest(2022).vcxproj", "{B2C3D4E5-6F7A-4B8C-9D0E-1F2A3B4C5D6E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PipeMsgMapTest", "PipeMsgMapTest\PipeMsgMapTest(2022).vcxproj", "{A1B2C3D4-5E6F-4A7B-8C9D-0E1F2A3B4C5D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RouteLoopbackTest", "RouteLoopbackTest\RouteLoopbackTest(2022).vcxproj", "{7F3A9C21-4B6E-4D82-9E15-2A7C6B0D1F44}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TwoConTest", "TwoConTest\TwoConTest(2022).vcxproj", "{C7A1F2B3-4D5E-6F70-8A9B-0C1D2E3F4A5B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WsaMeshTest", "WsaMeshTest\WsaMeshTest(2022).vcxproj", "{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1E20F3C-9D44-4C11-B2A7-7E1F0C2D3E88}.Debug|x64.ActiveCfg = Debug|x64
+		{A1E20F3C-9D44-4C11-B2A7-7E1F0C2D3E88}.Debug|x64.Build.0 = Debug|x64
+		{A1E20F3C-9D44-4C11-B2A7-7E1F0C2D3E88}.Release|x64.ActiveCfg = Release|x64
+		{A1E20F3C-9D44-4C11-B2A7-7E1F0C2D3E88}.Release|x64.Build.0 = Release|x64
+		{B5C3A4E1-2F7D-4891-8D6E-1A2B3C4D5E6F}.Debug|x64.ActiveCfg = Debug|x64
+		{B5C3A4E1-2F7D-4891-8D6E-1A2B3C4D5E6F}.Debug|x64.Build.0 = Debug|x64
+		{B5C3A4E1-2F7D-4891-8D6E-1A2B3C4D5E6F}.Release|x64.ActiveCfg = Release|x64
+		{B5C3A4E1-2F7D-4891-8D6E-1A2B3C4D5E6F}.Release|x64.Build.0 = Release|x64
+		{D3E4F5A6-B7C8-4901-8A2B-3C4D5E6F7083}.Debug|x64.ActiveCfg = Debug|x64
+		{D3E4F5A6-B7C8-4901-8A2B-3C4D5E6F7083}.Debug|x64.Build.0 = Debug|x64
+		{D3E4F5A6-B7C8-4901-8A2B-3C4D5E6F7083}.Release|x64.ActiveCfg = Release|x64
+		{D3E4F5A6-B7C8-4901-8A2B-3C4D5E6F7083}.Release|x64.Build.0 = Release|x64
+		{EEED090C-DF51-447C-A089-C9625F3DF1BB}.Debug|x64.ActiveCfg = Debug|x64
+		{EEED090C-DF51-447C-A089-C9625F3DF1BB}.Debug|x64.Build.0 = Debug|x64
+		{EEED090C-DF51-447C-A089-C9625F3DF1BB}.Release|x64.ActiveCfg = Release|x64
+		{EEED090C-DF51-447C-A089-C9625F3DF1BB}.Release|x64.Build.0 = Release|x64
+		{9A4E71D6-5C83-4F27-B0A1-6D8E2F3C4A59}.Debug|x64.ActiveCfg = Debug|x64
+		{9A4E71D6-5C83-4F27-B0A1-6D8E2F3C4A59}.Debug|x64.Build.0 = Debug|x64
+		{9A4E71D6-5C83-4F27-B0A1-6D8E2F3C4A59}.Release|x64.ActiveCfg = Release|x64
+		{9A4E71D6-5C83-4F27-B0A1-6D8E2F3C4A59}.Release|x64.Build.0 = Release|x64
+		{A1B2C3D4-E5F6-4708-9A0B-1C2D3E4F5061}.Debug|x64.ActiveCfg = Debug|x64
+		{A1B2C3D4-E5F6-4708-9A0B-1C2D3E4F5061}.Debug|x64.Build.0 = Debug|x64
+		{A1B2C3D4-E5F6-4708-9A0B-1C2D3E4F5061}.Release|x64.ActiveCfg = Release|x64
+		{A1B2C3D4-E5F6-4708-9A0B-1C2D3E4F5061}.Release|x64.Build.0 = Release|x64
+		{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F70}.Debug|x64.ActiveCfg = Debug|x64
+		{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F70}.Debug|x64.Build.0 = Debug|x64
+		{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F70}.Release|x64.ActiveCfg = Release|x64
+		{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F70}.Release|x64.Build.0 = Release|x64
+		{B2C3D4E5-6F7A-4B8C-9D0E-1F2A3B4C5D6E}.Debug|x64.ActiveCfg = Debug|x64
+		{B2C3D4E5-6F7A-4B8C-9D0E-1F2A3B4C5D6E}.Debug|x64.Build.0 = Debug|x64
+		{B2C3D4E5-6F7A-4B8C-9D0E-1F2A3B4C5D6E}.Release|x64.ActiveCfg = Release|x64
+		{B2C3D4E5-6F7A-4B8C-9D0E-1F2A3B4C5D6E}.Release|x64.Build.0 = Release|x64
+		{A1B2C3D4-5E6F-4A7B-8C9D-0E1F2A3B4C5D}.Debug|x64.ActiveCfg = Debug|x64
+		{A1B2C3D4-5E6F-4A7B-8C9D-0E1F2A3B4C5D}.Debug|x64.Build.0 = Debug|x64
+		{A1B2C3D4-5E6F-4A7B-8C9D-0E1F2A3B4C5D}.Release|x64.ActiveCfg = Release|x64
+		{A1B2C3D4-5E6F-4A7B-8C9D-0E1F2A3B4C5D}.Release|x64.Build.0 = Release|x64
+		{7F3A9C21-4B6E-4D82-9E15-2A7C6B0D1F44}.Debug|x64.ActiveCfg = Debug|x64
+		{7F3A9C21-4B6E-4D82-9E15-2A7C6B0D1F44}.Debug|x64.Build.0 = Debug|x64
+		{7F3A9C21-4B6E-4D82-9E15-2A7C6B0D1F44}.Release|x64.ActiveCfg = Release|x64
+		{7F3A9C21-4B6E-4D82-9E15-2A7C6B0D1F44}.Release|x64.Build.0 = Release|x64
+		{C7A1F2B3-4D5E-6F70-8A9B-0C1D2E3F4A5B}.Debug|x64.ActiveCfg = Debug|x64
+		{C7A1F2B3-4D5E-6F70-8A9B-0C1D2E3F4A5B}.Debug|x64.Build.0 = Debug|x64
+		{C7A1F2B3-4D5E-6F70-8A9B-0C1D2E3F4A5B}.Release|x64.ActiveCfg = Release|x64
+		{C7A1F2B3-4D5E-6F70-8A9B-0C1D2E3F4A5B}.Release|x64.Build.0 = Release|x64
+		{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F71}.Debug|x64.ActiveCfg = Debug|x64
+		{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F71}.Debug|x64.Build.0 = Debug|x64
+		{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F71}.Release|x64.ActiveCfg = Release|x64
+		{C7D4B5F2-3A8E-4B02-9E7F-2B3C4D5E6F71}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F8B1D42-6C90-4E77-A5B3-71D0E4C82A96}
+	EndGlobalSection
+EndGlobal
