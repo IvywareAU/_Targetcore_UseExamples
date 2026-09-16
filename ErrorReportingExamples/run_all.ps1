@@ -96,8 +96,8 @@ if (-not $NoBuild) {
     if ($LASTEXITCODE -ne 0) {
         Write-Host "FAIL: build returned $LASTEXITCODE"
         # The post-build step fails deliberately when the kernel is missing, because
-        # TargetCore is delay-loaded and the alternative is 0xC06D007E at startup.
-        Write-Host "      If it complained about TargetCore.dll, build TargetCore first;"
+        # Targetcore is delay-loaded and the alternative is 0xC06D007E at startup.
+        Write-Host "      If it complained about Targetcore.dll, build Targetcore first;"
         Write-Host "      this tree stages it from ..\..\bin\${Config}64."
         exit 1
     }

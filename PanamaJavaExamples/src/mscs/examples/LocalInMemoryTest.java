@@ -37,9 +37,9 @@
 //   both ways, nothing leaves the address space) by a different route -- and pays
 //   one login handshake for it.
 //
-//   If you specifically need pump injection, that is a reason to use TargetCore
+//   If you specifically need pump injection, that is a reason to use Targetcore
 //   directly; see DirectExamples\LocalInMemoryTest. Note that the flat C API
-//   TargetCore already publishes for FFI consumers (TargetCore_c.h) does not
+//   Targetcore already publishes for FFI consumers (Targetcore_c.h) does not
 //   expose it either, so "use the kernel directly" currently means C++.
 //
 // THE ORDERING RULE THAT REPLACED THE THREADING ONE. There IS still a rule, and

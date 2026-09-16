@@ -93,7 +93,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\..\Msgcore;..\..\..\TargetCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Msgcore;..\..\..\Targetcore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <SDLCheck>false</SDLCheck>
     </ClCompile>
@@ -104,24 +104,24 @@
       <!-- advapi32 is named explicitly rather than inherited: RegisterEventSourceW,
            ReportEventW and the Reg* calls all live there, and a service that
            cannot report is the one thing this example must not ship. -->
-      <AdditionalDependencies>Msgcore.lib;TargetCore.lib;advapi32.lib;MsWsock.lib;ws2_32.lib;comsuppwd.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Msgcore.lib;Targetcore.lib;advapi32.lib;MsWsock.lib;ws2_32.lib;comsuppwd.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\lib\$(Platform)\$(Configuration);..\..\..\lib\$(Platform);..\..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <DelayLoadDLLs>TargetCore.dll</DelayLoadDLLs>
+      <DelayLoadDLLs>Targetcore.dll</DelayLoadDLLs>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent>
       <!-- Stage the kernel from the shared deploy tree, bin\<Config>64, as the
            sibling example trees do. The closing check stays: xcopy exits 0 on a
            wildcard miss, so a missing DLL would otherwise be silent here and the
-           exe would die at startup with 0xC06D007E, TargetCore being delay-loaded.
+           exe would die at startup with 0xC06D007E, Targetcore being delay-loaded.
            For THIS example the DLL matters twice over - it also carries the
            message table that EventMessageFile is registered against, so a
            missing DLL means unformattable events as well as no process. -->
       <Command>xcopy /Y "..\..\..\bin\$(Configuration)64\Msgcore.dll" "$(OutDir)"
 if exist "..\..\..\bin\$(Configuration)64\Msgcore.pdb" xcopy /Y "..\..\..\bin\$(Configuration)64\Msgcore.pdb" "$(OutDir)"
-xcopy /Y "..\..\..\bin\$(Configuration)64\TargetCore.dll" "$(OutDir)"
-if exist "..\..\..\bin\$(Configuration)64\TargetCore.pdb" xcopy /Y "..\..\..\bin\$(Configuration)64\TargetCore.pdb" "$(OutDir)"
-if not exist "$(OutDir)TargetCore.dll" echo POSTBUILD ERROR: TargetCore.dll not found in "..\..\..\bin\$(Configuration)64" -- build TargetCore first. &amp;&amp; exit /b 1</Command>
+xcopy /Y "..\..\..\bin\$(Configuration)64\Targetcore.dll" "$(OutDir)"
+if exist "..\..\..\bin\$(Configuration)64\Targetcore.pdb" xcopy /Y "..\..\..\bin\$(Configuration)64\Targetcore.pdb" "$(OutDir)"
+if not exist "$(OutDir)Targetcore.dll" echo POSTBUILD ERROR: Targetcore.dll not found in "..\..\..\bin\$(Configuration)64" -- build Targetcore first. &amp;&amp; exit /b 1</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
 
@@ -138,7 +138,7 @@ if not exist "$(OutDir)TargetCore.dll" echo POSTBUILD ERROR: TargetCore.dll not 
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\..\Msgcore;..\..\..\TargetCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Msgcore;..\..\..\Targetcore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -146,17 +146,17 @@ if not exist "$(OutDir)TargetCore.dll" echo POSTBUILD ERROR: TargetCore.dll not 
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>Msgcore.lib;TargetCore.lib;advapi32.lib;MsWsock.lib;ws2_32.lib;comsuppw.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Msgcore.lib;Targetcore.lib;advapi32.lib;MsWsock.lib;ws2_32.lib;comsuppw.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\lib\$(Platform)\$(Configuration);..\..\..\lib\$(Platform);..\..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <DelayLoadDLLs>TargetCore.dll</DelayLoadDLLs>
+      <DelayLoadDLLs>Targetcore.dll</DelayLoadDLLs>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "..\..\..\bin\$(Configuration)64\Msgcore.dll" "$(OutDir)"
 if exist "..\..\..\bin\$(Configuration)64\Msgcore.pdb" xcopy /Y "..\..\..\bin\$(Configuration)64\Msgcore.pdb" "$(OutDir)"
-xcopy /Y "..\..\..\bin\$(Configuration)64\TargetCore.dll" "$(OutDir)"
-if exist "..\..\..\bin\$(Configuration)64\TargetCore.pdb" xcopy /Y "..\..\..\bin\$(Configuration)64\TargetCore.pdb" "$(OutDir)"
-if not exist "$(OutDir)TargetCore.dll" echo POSTBUILD ERROR: TargetCore.dll not found in "..\..\..\bin\$(Configuration)64" -- build TargetCore first. &amp;&amp; exit /b 1</Command>
+xcopy /Y "..\..\..\bin\$(Configuration)64\Targetcore.dll" "$(OutDir)"
+if exist "..\..\..\bin\$(Configuration)64\Targetcore.pdb" xcopy /Y "..\..\..\bin\$(Configuration)64\Targetcore.pdb" "$(OutDir)"
+if not exist "$(OutDir)Targetcore.dll" echo POSTBUILD ERROR: Targetcore.dll not found in "..\..\..\bin\$(Configuration)64" -- build Targetcore first. &amp;&amp; exit /b 1</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
 

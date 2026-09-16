@@ -23,7 +23,7 @@
 # (README.md), plus two that vary the SUBJECT rather than the binding and so are
 # not among the five: ErrorReportingExamples (where a diagnostic goes) and
 # SecurityExamples (the posture a hub runs in).
-# None of them builds standalone: Msgcore/, TargetCore/,
+# None of them builds standalone: Msgcore/, Targetcore/,
 # TargetFacade/ and vsutils/ are peer directories of a parent MSCS solution that
 # is not published here. So a per-push workflow has a choice between verifying
 # nothing and verifying bookkeeping, and bookkeeping is worth more than zero.
@@ -116,7 +116,7 @@ TREES = [
         {r"..\..\..\vsutils\DelayLoadReport.cpp"},
         {
             r"..\..\..\Msgcore",
-            r"..\..\..\TargetCore",
+            r"..\..\..\Targetcore",
             r"..\..\..\lib\$(Platform)\$(Configuration)",
             r"..\..\..\lib\$(Platform)",
             r"..\..\..\lib",
@@ -141,14 +141,14 @@ TREES = [
         {r"..\..\..\vsutils\DelayLoadReport.cpp"},
         {
             r"..\..\..\Msgcore",
-            r"..\..\..\TargetCore",
+            r"..\..\..\Targetcore",
             r"..\..\..\lib\$(Platform)\$(Configuration)",
             r"..\..\..\lib\$(Platform)",
             r"..\..\..\lib",
         },
     ),
     # SecurityExamples is the other non-binding tree: its two harnesses hold
-    # the binding fixed -- plain C++ against TargetCore.lib, exactly as
+    # the binding fixed -- plain C++ against Targetcore.lib, exactly as
     # DirectExamples is -- and vary the SECURITY POSTURE instead, MixConTest
     # opting out of auth and sealing where MixConTestAuth provisions for them.
     # Its outward set is DirectExamples' minus $(KgnRoot), and it is pinned for
@@ -162,7 +162,7 @@ TREES = [
         {r"..\..\..\vsutils\DelayLoadReport.cpp"},
         {
             r"..\..\..\Msgcore",
-            r"..\..\..\TargetCore",
+            r"..\..\..\Targetcore",
             r"..\..\..\lib\$(Platform)\$(Configuration)",
             r"..\..\..\lib\$(Platform)",
             r"..\..\..\lib",

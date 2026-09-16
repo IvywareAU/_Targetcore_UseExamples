@@ -50,7 +50,7 @@
 // Each node's onTransit / onDeliver / onDropped hooks record what route() did,
 // so the verdict is checked against the exact hop sequence, not just "arrived".
 //
-// This is NOT the MSCS TargetCore path (no P2PeerHub, no PostP2Pmsg, no pump
+// This is NOT the MSCS Targetcore path (no P2PeerHub, no PostP2Pmsg, no pump
 // thread). It is the clean-room in-process router that the code generator emits
 // generated projects against (native/treehub_runtime). Contrast with the sibling
 // MSCS harnesses (LocalInMemoryTest, PipeMeshTest, WsaMeshTest, ...).

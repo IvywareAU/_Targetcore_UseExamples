@@ -93,8 +93,8 @@ so a headless run never hangs on a modal dialog.
 
 ## Build & run
 
-Mirrors `PipeMeshTest`: references the sibling `Msgcore` / `TargetCore` projects
-(`..\..\..\lib` for import libs, `..\..\..\Msgcore` / `..\..\..\TargetCore` for headers).
+Mirrors `PipeMeshTest`: references the sibling `Msgcore` / `Targetcore` projects
+(`..\..\..\lib` for import libs, `..\..\..\Msgcore` / `..\..\..\Targetcore` for headers).
 
 ```
 msbuild "PipeMsgMapTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
@@ -103,7 +103,7 @@ msbuild "PipeMsgMapTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 
 > **Why no `/DELAYLOAD` here** (unlike `PipeMeshTest`): defining a `P2PeerMsg_MAP` pulls in
 > the imported **data** symbol `P2PeerHub::P2PeerMsgMap`, and the linker refuses to
-> delay-load a DLL from which a data symbol is imported (`LNK1194`). So `TargetCore.dll`
+> delay-load a DLL from which a data symbol is imported (`LNK1194`). So `Targetcore.dll`
 > is loaded normally and the post-build step copies it (from `..\..\..\bin\Debug64\`) next to
 > the exe, alongside `Msgcore.dll`.
 

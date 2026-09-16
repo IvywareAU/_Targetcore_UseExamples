@@ -15,12 +15,12 @@
 //
 // WsaMeshTest.cpp
 //
-// SINGLE-PROCESS, TWO-HUB LOOPBACK-TCP connectivity probe for TargetCore.
+// SINGLE-PROCESS, TWO-HUB LOOPBACK-TCP connectivity probe for Targetcore.
 //
 // Question this harness answers:
 //   Can two P2PeerHub's living in ONE process connect to each other over a
 //   loopback TCP socket (P2PeerConWsa on 127.0.0.1) and complete the
-//   TargetCore login handshake -- i.e. does the historical in-process
+//   Targetcore login handshake -- i.e. does the historical in-process
 //   loopback-TCP failure (ASSERT(pCon==nullptr) at P2Pwin32.cpp:3844,
 //   no On_ConLoginAck) still occur against the CURRENT (fixed) DLLs?
 //

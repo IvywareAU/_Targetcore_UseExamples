@@ -60,7 +60,7 @@
 // What provisioning actually is, in the order the arming gate checks it
 // ---------------------------------------------------------------------------
 // P2PeerHub::SpawnHub() calls AuthArmOrRefuse() BEFORE the pump thread exists
-// (TargetCore/P2PeerHub.cpp:187). AuthArm() then refuses ONE REASON AT A TIME,
+// (Targetcore/P2PeerHub.cpp:187). AuthArm() then refuses ONE REASON AT A TIME,
 // in this order, so satisfying one moves the refusal to the next rather than
 // clearing it:
 //
@@ -102,7 +102,7 @@
 // What RequireSeal(true) does and does NOT do here
 // ---------------------------------------------------------------------------
 // Nothing in this test is ever sealed, and that is the correct outcome rather
-// than a gap. P2PeerCon::SealAppMsgOutbound (TargetCore/P2PeerCon.cpp:2773)
+// than a gap. P2PeerCon::SealAppMsgOutbound (Targetcore/P2PeerCon.cpp:2773)
 // returns early when the link is the LAST HOP -- `if (m_oThatP2Paddr ==
 // strScope) return true;` -- and every message here is single-hop: HubA->HubB
 // rides the connection whose far end IS HubB. Sealing engages when a message

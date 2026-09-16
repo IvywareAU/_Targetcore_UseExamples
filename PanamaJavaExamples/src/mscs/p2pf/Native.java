@@ -137,7 +137,7 @@ public final class Native {
     // UTF-16LE -- java.lang.String's own encoding. That is the one piece of luck
     // in this binding: the conversion is a copy, not a transcode, and a Java
     // consumer of MSCS pays nothing for the kernel's Unicode build. (The _u8
-    // surface TargetCore_c.h publishes for portability exists because wchar_t is
+    // surface Targetcore_c.h publishes for portability exists because wchar_t is
     // UTF-32 on Linux; on Windows it would be pure overhead here.)
 
     /** Copy a Java string into the arena as a NUL-terminated wchar_t*. */

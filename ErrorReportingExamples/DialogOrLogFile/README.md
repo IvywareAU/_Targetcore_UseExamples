@@ -1,6 +1,6 @@
 # `DialogOrLogFile` — the `ErrToMessageBox` switch, and what it costs to get it wrong
 
-**TargetCore** reads a plain text file, `P2Pmsg.cfg`, from beside the host
+**Targetcore** reads a plain text file, `P2Pmsg.cfg`, from beside the host
 executable:
 
 ```ini
@@ -122,7 +122,7 @@ is no desktop and so nothing to close the dialog at all.
 
 This harness needs no kernel. Its whole subject is `P2Pevent`, which lives in
 **Msgcore**, and it raises events directly — so it links `Msgcore.lib` alone and
-stages `Msgcore.dll` alone. No `TargetCore`, no delay-load, no
+stages `Msgcore.dll` alone. No `Targetcore`, no delay-load, no
 `DelayLoadReport.cpp`. That is a statement rather than an omission: naming a
 library it never calls would claim a dependency that does not exist.
 

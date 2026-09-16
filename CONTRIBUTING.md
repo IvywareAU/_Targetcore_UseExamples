@@ -1,9 +1,9 @@
-# Contributing to `_TargetCore_UseExamples`
+# Contributing to `_Targetcore_UseExamples`
 
 ## Before you spend time on a change
 
 This repository is **not self-contained** — a fresh clone does not compile, because
-`Msgcore/`, `TargetCore/`, `TargetFacade/` and `vsutils/` are peer directories in a
+`Msgcore/`, `Targetcore/`, `TargetFacade/` and `vsutils/` are peer directories in a
 parent solution that is not published here. The README's ["The sibling
 dependencies"](README.md#the-sibling-dependencies) lists every binding, including the
 one (`$(KgnRoot)`) that only `RouteLoopbackTest` has. Until that is resolved an outside
@@ -28,8 +28,8 @@ changes what a good contribution looks like:
   the standard: what is being asked, what the framework source actually says about it
   (cited by file and line), what was verified rather than assumed, and what is still
   unknown.
-- **Do not quietly fix the library from in here.** If a harness reveals a TargetCore
-  defect, the harness records it and the fix goes in `TargetCore`. An example that works
+- **Do not quietly fix the library from in here.** If a harness reveals a Targetcore
+  defect, the harness records it and the fix goes in `Targetcore`. An example that works
   around a bug teaches the workaround, not the API.
 
 ## Sign your work — the Developer Certificate of Origin

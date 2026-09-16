@@ -9,7 +9,7 @@ over the DIRECT loopback transport:
 PeerNetwork::route(origin, dst, body);
 ```
 
-> **Not an MSCS/TargetCore harness.** Unlike its siblings in this folder
+> **Not an MSCS/Targetcore harness.** Unlike its siblings in this folder
 > (`LocalInMemoryTest`, `PipeMeshTest`, `WsaMeshTest`, …), this example uses no
 > `P2PeerHub`, no `PostP2Pmsg`, no pump thread. It links the prebuilt
 > `treehub_runtime.lib`, which is produced by a separate repository that this
@@ -112,7 +112,7 @@ There are no runtime DLL dependencies (static lib, no MSCS, no post-build copy).
 
 ## Relation to the other harnesses
 
-- `LocalInMemoryTest` — MSCS TargetCore; two in-process hubs, **no wire**, via `PostP2Pmsg` pump-injection.
+- `LocalInMemoryTest` — MSCS Targetcore; two in-process hubs, **no wire**, via `PostP2Pmsg` pump-injection.
 - `PipeMeshTest` / `WsaMeshTest` — MSCS; real named-pipe / loopback-TCP cons, two hubs in one process.
 - `AlexTest` — MSCS; real WSA con across **two processes**.
 - **`RouteLoopbackTest` — treehub_runtime (non-MSCS); pure `PeerNetwork::route()` hop-by-hop, no threads.**

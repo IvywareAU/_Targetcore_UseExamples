@@ -51,13 +51,13 @@ No harness `.cpp` includes a COM header directly. They all include
 
 | file:line | what |
 |---|---|
-| `common\Com.props:57` | the only libraries are `ole32.lib;oleaut32.lib;uuid.lib`. No `TargetFacade.lib`, no `TargetCore.lib`, no project `.lib` at all |
+| `common\Com.props:57` | the only libraries are `ole32.lib;oleaut32.lib;uuid.lib`. No `TargetFacade.lib`, no `Targetcore.lib`, no project `.lib` at all |
 | `common\ComHarness.h:518` | `CoCreateInstance(CLSID_P2PNetwork, NULL, CLSCTX_INPROC_SERVER, IID_IP2PNetworkCom, ...)` — the implementation is found in `HKCU\Software\Classes` |
 | `run_all.ps1:50-52` | registers the **staged** `bin\<Config>\TargetCom(2026)[d].dll` with `regsvr32 /s /n /i:user` |
 | `run_all.ps1:104` | unregisters it again |
 | `script\ps_client.ps1:46` | `New-Object -ComObject TargetCom.P2PNetwork` — ProgID only |
 | `script\vbs_client.vbs:46` | `CreateObject("TargetCom.P2PNetwork")` — ProgID only |
-| `common\Com.props:59-65` | post-build step stages the four runtime DLLs (TargetCom, TargetFacade, TargetCore, Msgcore) next to the exes |
+| `common\Com.props:59-65` | post-build step stages the four runtime DLLs (TargetCom, TargetFacade, Targetcore, Msgcore) next to the exes |
 
 ## Summary
 
@@ -167,18 +167,18 @@ msbuild "TargetFacade(2026).sln" -p:Configuration=Debug -p:Platform=Win32   # 32
 ```
 
 **Build the kernel first, and mind the platform NAME.** The facade solution
-calls 32-bit `Win32`; `TargetCore(2026).sln` calls it **`x86`** (mapping to the
+calls 32-bit `Win32`; `Targetcore(2026).sln` calls it **`x86`** (mapping to the
 project's `Win32`). Passing `-p:Platform=Win32` to the kernel solution fails
 with MSB4126 and reads like "there is no 32-bit build", which is not what it
 means:
 
 ```
-msbuild "TargetCore(2026).sln" -p:Configuration=Debug -p:Platform=x86        # NOT Win32
+msbuild "Targetcore(2026).sln" -p:Configuration=Debug -p:Platform=x86        # NOT Win32
 ```
 
 The kernel has to go first because it is what produces
-`lib\Win32\TargetCore(2026)*.lib`. Without it the facade fails at
-`LNK1104: cannot open file 'TargetCore.lib'` — and only on a *clean*
+`lib\Win32\Targetcore(2026)*.lib`. Without it the facade fails at
+`LNK1104: cannot open file 'Targetcore.lib'` — and only on a *clean*
 build, because an incremental one happily reuses the previous link. If the
 32-bit chain looks fine, confirm it with `-t:Rebuild` before believing it.
 
@@ -192,7 +192,7 @@ automatically and same-named import libraries never clobber one another.
 
 Register each with the matching `regsvr32`, and run each next to its own three
 dependency DLLs — an x86 `TargetCom` needs the x86 `TargetFacade`,
-`TargetCore` and `Msgcore`:
+`Targetcore` and `Msgcore`:
 
 ```
 %SystemRoot%\System32\regsvr32.exe  /n /i:user  ...\com\x64\Debug\TargetCom.dll
@@ -216,7 +216,7 @@ worker.
 uses `std::atomic_ref` (C++20) while the kernel's `Win32` configurations were
 still on `stdcpp17` — the `x64` ones had been moved to `stdcpplatest` and the
 `Win32` ones had not. So the 32-bit kernel would not compile, no x86
-`TargetCore` import library or DLL existed anywhere in the tree, and the facade
+`Targetcore` import library or DLL existed anywhere in the tree, and the facade
 could not link 32-bit from clean. What hid it: the stale x86 `TargetFacade` /
 `TargetCom` DLLs left in `Win32\<Config>\` from before the rot made incremental
 builds appear to succeed, and nothing in the routine test matrix is 32-bit. Two
@@ -226,7 +226,7 @@ other.
 
 One practical note from doing it: `com\Win32\<Config>\` is an *intermediate*
 directory with no DLLs staged into it, so `regsvr32` there fails with exit 3
-(`LoadLibrary` cannot resolve `TargetFacade`, `TargetCore`, `Msgcore`). Copy the
+(`LoadLibrary` cannot resolve `TargetFacade`, `Targetcore`, `Msgcore`). Copy the
 four next to each other first — which is exactly what `Com.props`' staging step
 does for x64, and what `bin\<Config>` is for.
 

@@ -21,7 +21,7 @@
 // straight onto a hub pump via PostP2Pmsg), this harness drives a REAL
 // P2PeerCon: the "Dmx" in-process demux transport. Two P2PeerHub's in one
 // process establish a P2PeerConDmx service<->client connection, run the
-// TargetCore login handshake, and exchange a BCast over the connection.
+// Targetcore login handshake, and exchange a BCast over the connection.
 //
 // It mirrors PipeMeshTest exactly, with one difference: the transport is
 // P2PeerConDmx (in-address-space rendezvous, no OS handle) instead of

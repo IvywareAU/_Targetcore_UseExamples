@@ -1,4 +1,4 @@
-# `ErrorReportingExamples` — where a **TargetCore** diagnostic goes
+# `ErrorReportingExamples` — where a **Targetcore** diagnostic goes
 
 The sibling trees in this repository are about getting messages from one hub to
 another. This one is about what happens when something goes **wrong** while they
@@ -82,9 +82,9 @@ library can do for you is raise the events that are **yours** — that is the pa
   and what happens to an exception thrown inside a handler.
 * [`DirectExamples`](../DirectExamples) — the transport harnesses. Every one of
   them includes `Msgexception.h`; none of them is about it.
-* `TargetCore/SECURITY.md` — the posture table, including the row for this
+* `Targetcore/SECURITY.md` — the posture table, including the row for this
   property, and why `CloseHub()`'s wait is deliberately unbounded.
-* `TargetCore/TargetCoreEvt.mc` — the message catalogue these examples render
+* `Targetcore/TargetcoreEvt.mc` — the message catalogue these examples render
   through, and the regeneration command for it.
 
 ## Licence

@@ -35,8 +35,8 @@
 //         "the configuration named a port I cannot use", "a peer was refused"
 //         - which no library can raise on your behalf because it does not know
 //         they are events.
-//       : It reuses TargetCore's committed message catalogue (TargetCoreEvt.h,
-//         built from TargetCoreEvt.mc) rather than carrying one of its own.
+//       : It reuses Targetcore's committed message catalogue (TargetcoreEvt.h,
+//         built from TargetcoreEvt.mc) rather than carrying one of its own.
 //         The catalogue's entries take two insertion strings and render them
 //         verbatim, which is all an application needs to put its own text in
 //         the log.  If you want your own event IDs to alert on, write your own

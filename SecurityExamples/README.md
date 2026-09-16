@@ -1,8 +1,8 @@
 # `SecurityExamples` — the same claim, made twice, with the security defaults **off** and then **on**
 
-The five binding trees in this repository vary *how a caller reaches* TargetCore
+The five binding trees in this repository vary *how a caller reaches* Targetcore
 and hold the subject fixed. This tree does neither. It holds the **binding**
-fixed — both harnesses are plain C++ against `TargetCore.lib`, exactly as
+fixed — both harnesses are plain C++ against `Targetcore.lib`, exactly as
 `DirectExamples` is — and varies the **security posture** instead.
 
 That is the whole design, and it is worth stating plainly because it is what
@@ -131,10 +131,10 @@ verdict table and **exits with the number of failures**. Neither harness is
 interactive and neither needs elevation, so — unlike `DirectExamples` and
 `ErrorReportingExamples` — nothing in this tree has to be skipped.
 
-Both harnesses **delay-load** `TargetCore.dll` and stage it, with `Msgcore.dll`,
+Both harnesses **delay-load** `Targetcore.dll` and stage it, with `Msgcore.dll`,
 from `..\..\..\bin\<Config>64` in a post-build step. That step fails loudly when
 the DLL is not there, because the alternative is `0xC06D007E` at startup with
-nothing to read. Build `Msgcore` and `TargetCore` first.
+nothing to read. Build `Msgcore` and `Targetcore` first.
 
 > **Console note.** Unlike `DirectExamples\TwoConTest`, neither harness puts
 > stdout into `_O_U16TEXT`. With the pipe transport active, wide and narrow
@@ -148,7 +148,7 @@ nothing to read. Build `Msgcore` and `TargetCore` first.
   rule met from the other side.
 * [`ArchitectureFAQ.md`](../ArchitectureFAQ.md) — hubs vs pumps, thread
   affinity, and the login handshake, at the root because it holds for every tree.
-* `TargetCore/SECURITY.md` — the posture table these two harnesses sit either
+* `Targetcore/SECURITY.md` — the posture table these two harnesses sit either
   side of, and the documented one-line migration each of them takes.
 * `MscsUnitTests/mix_con.cpp` — the in-tree twin of `MixConTest`, which takes the
   same `RequireAuth(false)` migration. Not part of this repository.

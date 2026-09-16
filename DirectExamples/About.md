@@ -26,7 +26,7 @@ AlexTest.exe send 127.0.0.1 "Hello from client!" -- CLIENT, connects and sends o
 ```
 
 Each process hosts one `P2PeerHub` on its own `SpawnHub()` pump thread. They connect over
-real loopback TCP via `P2PeerConWsa`, run the TargetCore login handshake, and the client
+real loopback TCP via `P2PeerConWsa`, run the Targetcore login handshake, and the client
 posts a single `P2Pmsg_BCast` that the server prints.
 
 `AlexTestHub` derives from `P2PeerHub` and overrides:
@@ -98,9 +98,9 @@ Its header block also carries the Linux build line verbatim:
 
 ```
 g++ -std=c++23 -fpermissive -D_UNICODE -DUNICODE -I. -I../Msgcore \
-    -I../TargetCore -I../Msgcore/Platform -I../Msgcore/Platform/win-compat alex_test.cpp \
-    -L../build/TargetCore -ltargetcore -L../build/Msgcore -lmsgcore -luring \
-    -Wl,-rpath,../build/TargetCore -Wl,-rpath,../build/Msgcore -o alex_test
+    -I../Targetcore -I../Msgcore/Platform -I../Msgcore/Platform/win-compat alex_test.cpp \
+    -L../build/Targetcore -ltargetcore -L../build/Msgcore -lmsgcore -luring \
+    -Wl,-rpath,../build/Targetcore -Wl,-rpath,../build/Msgcore -o alex_test
 ```
 
 `ArchitectureFAQ.md:1101` records its role:
@@ -110,7 +110,7 @@ g++ -std=c++23 -fpermissive -D_UNICODE -DUNICODE -I. -I../Msgcore \
 > port, use the original.**
 
 Its own header states the distinction from `WsaMeshTest` sharply: each side drives *its own*
-`TargetCore` pump on *its own* io_uring ring in a *separate address space* — unlike
+`Targetcore` pump on *its own* io_uring ring in a *separate address space* — unlike
 `wsa_mesh.cpp`, which puts both hubs in one process on one ring.
 
 ---
@@ -137,7 +137,7 @@ in-process loopback-TCP failure (`ASSERT(pCon==nullptr)` at `P2Pwin32.cpp:3844`)
 against the current DLLs. `AlexInterop` answers the complementary question that no
 single-process harness can: does the message cross a real process boundary?
 
-**2. Neither installs the assert hook.** The other nine TargetCore harnesses carry:
+**2. Neither installs the assert hook.** The other nine Targetcore harnesses carry:
 
 ```cpp
 _CrtSetReportHook(AssertReportHook);   // a debug ASSERT would pop a MODAL DIALOG
@@ -151,9 +151,9 @@ interactive by design. For `AlexInterop`, which is otherwise built for unattende
 the one remaining gap in its headless contract.
 
 **3. `RouteLoopbackTest` is the tree's real outlier**, not these two. It is the only project
-that does not touch TargetCore at all: it links `treehub_runtime.lib`, compiles as C++20, and
+that does not touch Targetcore at all: it links `treehub_runtime.lib`, compiles as C++20, and
 uses no MFC and no `CWinApp`. Every other project here links
-`Msgcore.lib;TargetCore.lib;MsWsock.lib;ws2_32.lib;comsuppwd.lib;delayimp.lib` and compiles
+`Msgcore.lib;Targetcore.lib;MsWsock.lib;ws2_32.lib;comsuppwd.lib;delayimp.lib` and compiles
 as C++17.
 
 ---
@@ -165,10 +165,10 @@ solution configurations. Their settings are uniform with the rest of the tree:
 
 - `ConfigurationType` Application, `UseOfMfc` **Dynamic**, `CharacterSet` Unicode
 - `PlatformToolset` v145, `LanguageStandard` `stdcpp17`, x64 only
-- `/DELAYLOAD:TargetCore.dll` plus `..\..\..\vsutils\DelayLoadReport.cpp` compiled in
+- `/DELAYLOAD:Targetcore.dll` plus `..\..\..\vsutils\DelayLoadReport.cpp` compiled in
 - output to the shared `out\$(Platform)\$(Configuration)\` tree at the repository root
-- post-build step stages `Msgcore.dll` / `TargetCore.dll` from `..\..\..\bin\$(Configuration)64\`
-  and **fails the build** if `TargetCore.dll` is missing (`xcopy` exits `0` on a wildcard
+- post-build step stages `Msgcore.dll` / `Targetcore.dll` from `..\..\..\bin\$(Configuration)64\`
+  and **fails the build** if `Targetcore.dll` is missing (`xcopy` exits `0` on a wildcard
   miss, so without that check the exe would die at startup with `0xC06D007E`)
 
 Diffed against `WsaMeshTest`, the `AlexTest` project file differs only in its `ProjectGuid`
@@ -181,7 +181,7 @@ configuration). `AlexInterop` additionally lacks a `.vcxproj.filters` and `.vcxp
 `UseOfMfc=Dynamic` and its `stdafx.h` pulls in `afxwin.h`. Every other MFC harness in the tree
 declares one. `AlexTest/README.md:195-199` explains why that global was thought to matter:
 
-> `TargetCore.dll` is an **MFC Extension DLL**. Its `DllMain` calls `AfxInitExtensionModule` /
+> `Targetcore.dll` is an **MFC Extension DLL**. Its `DllMain` calls `AfxInitExtensionModule` /
 > `new CDynLinkLibrary(...)`, which requires MFC's thread state (`AfxGetThread()`) to be
 > valid. That state is set up by the `CWinApp theApp` global — which is constructed *after*
 > implicit DLLs would normally load.

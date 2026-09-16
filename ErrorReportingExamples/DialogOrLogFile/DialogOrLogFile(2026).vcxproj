@@ -17,12 +17,12 @@
 
    WHY THIS PROJECT LINKS LESS THAN ITS SIBLING
 
-   NTServiceEventLog next door hosts a P2PeerHub, so it needs TargetCore, the
+   NTServiceEventLog next door hosts a P2PeerHub, so it needs Targetcore, the
    delay-load report, and both DLLs staged. This harness does not host anything:
    its whole subject is P2Pevent, which lives in Msgcore, and it raises events
    directly. So it links Msgcore alone and stages Msgcore.dll alone.
 
-   That is a deliberate statement rather than an omission. Naming TargetCore.lib
+   That is a deliberate statement rather than an omission. Naming Targetcore.lib
    here would claim a dependency that does not exist, and delay-loading a DLL
    nothing calls would install a failure report that can never fire.
 -->
@@ -176,7 +176,7 @@ if not exist "$(OutDir)Msgcore.dll" echo POSTBUILD ERROR: Msgcore.dll not found 
   <!-- ===== The artefact itself, carried as a reference and NOT staged =====
 
        A None item is listed and never copied, which is the whole point here:
-       TargetCore searches for P2Pmsg.cfg beside the host executable, and the
+       Targetcore searches for P2Pmsg.cfg beside the host executable, and the
        output directory is shared with NTServiceEventLog.exe. Staging this
        would reconfigure that harness too, and leg 1 of this one deletes the
        file it writes there. Do not give it DeploymentContent. -->

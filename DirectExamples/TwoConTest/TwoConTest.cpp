@@ -27,7 +27,7 @@
 //   Is that allowed? Does the hub drive both, letting them connect to each
 //   other over TCP loopback -- i.e. the hub logging in to itself?
 //
-// What the TargetCore source says (verified, not guessed):
+// What the Targetcore source says (verified, not guessed):
 //   * A P2PeerHub owns a LIST of P2PeerCon's (EnumP2PmsgCon) -- it is built to
 //     supervise many connections, so two is fine IN PRINCIPLE.
 //   * BUT P2PeerHub::PostP2PeerCon (P2PeerHub.cpp:432-447) REJECTS a second

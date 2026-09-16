@@ -26,7 +26,7 @@
 //
 // The server end opens COM5, applies the serial line discipline and arms
 // WaitCommEvent(EV_RXCHAR) as its "accept" (first inbound data). The
-// client end opens COM6 and runs the TargetCore login handshake over the
+// client end opens COM6 and runs the Targetcore login handshake over the
 // wire; the server's listening con morphs (pipe-style AcceptSpawn swap)
 // into the accepted session con. A BCast is then exchanged over the
 // connection.

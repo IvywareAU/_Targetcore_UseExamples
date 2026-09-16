@@ -80,7 +80,7 @@ Build it, then inject it:
 
 ## Build & run
 
-Mirrors `PipeMsgMapTest` (same `..\..\..\lib` import libs, `..\..\..\Msgcore` / `..\..\..\TargetCore`
+Mirrors `PipeMsgMapTest` (same `..\..\..\lib` import libs, `..\..\..\Msgcore` / `..\..\..\Targetcore`
 headers, no `/DELAYLOAD` because `BEGIN_P2PeerMsg_MAP` imports a data symbol).
 
 ```

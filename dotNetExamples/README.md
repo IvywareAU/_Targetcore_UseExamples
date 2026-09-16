@@ -70,14 +70,14 @@ dropped inside the kernel before any callback was raised, so the sink was simply
 never called. It was the one failure in this tree that no amount of interop
 archaeology would have explained.
 
-## Note on TargetCore's flat C API
+## Note on Targetcore's flat C API
 
-The numbers above were taken after `TargetCore_c.{h,cpp,_u8.cpp}` — the flat
-`extern "C"` / Panama surface — was removed from `TargetCore.dll` on 2026-08-13.
+The numbers above were taken after `Targetcore_c.{h,cpp,_u8.cpp}` — the flat
+`extern "C"` / Panama surface — was removed from `Targetcore.dll` on 2026-08-13.
 This tree could not have used it in any case: the harnesses import nothing native
 at all, reaching the kernel through `TargetCom` and the registry. Removing it
 changed no result here. The sources are preserved in
-`MSCS_JavaBindings\TargetCore\native\`.
+`MSCS_JavaBindings\Targetcore\native\`.
 
 ## Migrated to TargetFacade ABI 4
 
@@ -142,7 +142,7 @@ ABI 4, and it is the sharpest of them.
 
 | | links / references | binds to the implementation |
 |---|---|---|
-| `DirectExamples` | `TargetCore.lib` + `Msgcore.lib`, MFC | at link time |
+| `DirectExamples` | `Targetcore.lib` + `Msgcore.lib`, MFC | at link time |
 | `FacadeExamples` | `TargetFacade.lib` | at link time |
 | `ComExamples` | `ole32`/`oleaut32`/`uuid` + the type library | registry, at run time |
 | `dotNetExamples` | **`mscorlib` / `System` / `System.Core`** | registry, at run time |

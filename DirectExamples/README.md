@@ -1,6 +1,6 @@
-# `DirectExamples` — worked examples for the **TargetCore** library
+# `DirectExamples` — worked examples for the **Targetcore** library
 
-Twelve console harnesses for `MSCS/TargetCore` — the message **transport** library:
+Twelve console harnesses for `MSCS/Targetcore` — the message **transport** library:
 `P2PeerHub`s, the pump threads that drive them, the `P2PeerCon` transports that
 join them, the login handshake, and `P2PeerMsg` routing between them.
 
@@ -15,7 +15,7 @@ range.
 | --- | --- | --- |
 | Subject | moving messages between hubs | what is *in* a message |
 | Written against | `P2PeerHub`, `P2PeerCon`, `P2PeerMsg` | `P3Pmsg*`, `P2PmsgMgr`, `Msgcore_c.h` |
-| Links | `TargetCore.lib` + `Msgcore.lib` | `Msgcore.lib` (+ `TargetCore.lib` for two) |
+| Links | `Targetcore.lib` + `Msgcore.lib` | `Msgcore.lib` (+ `Targetcore.lib` for two) |
 | Networking | every harness | the last two only |
 
 Two long-form documents sit beside this one and are not repeated here:
@@ -48,7 +48,7 @@ first, then whichever transport you care about.
 | 9 | [`PipeMsgFactoryTest`](PipeMsgFactoryTest) | `P2PeerConPipe` | the same round trip built through `P2PeerMsg::RedirectFactory` instead of a hand-constructed `P2PeerMsg32` |
 | 10 | [`TwoConTest`](TwoConTest) | `P2PeerConWsa` ×2 | can **one** hub supervise two connections and log in to itself? |
 | 11 | [`ExplorerTest`](ExplorerTest) | `P2PeerConWsa` | standing up a `P2PeerExplorer` expump, and the four rules a client has to obey to talk to one |
-| 12 | [`RouteLoopbackTest`](RouteLoopbackTest) | none | the tree's outlier: `PeerNetwork::route()` in the **`treehub_runtime`** engine — no TargetCore, no MFC |
+| 12 | [`RouteLoopbackTest`](RouteLoopbackTest) | none | the tree's outlier: `PeerNetwork::route()` in the **`treehub_runtime`** engine — no Targetcore, no MFC |
 
 ---
 
@@ -119,12 +119,12 @@ there is no fallback.
 
 | # | What is reached | Where from | Needed by |
 | - | --------------- | ---------- | --------- |
-| 1 | `..\..\..\Msgcore` and `..\..\..\TargetCore` | headers, at compile time | all 12 except `RouteLoopbackTest` |
-| 2 | `..\..\..\lib\$(Platform)\$(Configuration)\{Msgcore,TargetCore}.lib` | import libraries, at link time | all 12 except `RouteLoopbackTest` |
-| 3 | `..\..\..\bin\$(Configuration)64\{Msgcore,TargetCore}.dll` | staged by a post-build `xcopy`, at run time | all 12 except `RouteLoopbackTest` |
+| 1 | `..\..\..\Msgcore` and `..\..\..\Targetcore` | headers, at compile time | all 12 except `RouteLoopbackTest` |
+| 2 | `..\..\..\lib\$(Platform)\$(Configuration)\{Msgcore,Targetcore}.lib` | import libraries, at link time | all 12 except `RouteLoopbackTest` |
+| 3 | `..\..\..\bin\$(Configuration)64\{Msgcore,Targetcore}.dll` | staged by a post-build `xcopy`, at run time | all 12 except `RouteLoopbackTest` |
 | 4 | `..\..\..\vsutils\DelayLoadReport.cpp` | compiled in, to report a `/DELAYLOAD` fault legibly | 9 of the 12 |
 
-The post-build step fails the build if `TargetCore.dll` is missing rather than
+The post-build step fails the build if `Targetcore.dll` is missing rather than
 letting it pass: `xcopy` exits `0` on a wildcard miss, and without that check the
 exe would build green and then die at startup with `0xC06D007E`.
 

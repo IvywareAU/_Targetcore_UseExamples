@@ -20,7 +20,7 @@
 
   A facade client needs exactly three things, and this file is the proof of how
   few they are: one include directory, one import library, and the DLLs beside
-  the exe. No MFC, no ATL, no TargetCore include path, no WinSock library, no
+  the exe. No MFC, no ATL, no Targetcore include path, no WinSock library, no
   precompiled header.
 
   All projects build into ONE output directory so the three runtime DLLs are
@@ -77,7 +77,7 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y /D "$(FacadeRoot)out\$(Platform)\$(Configuration)\TargetFacade.dll" "$(OutDir)"
-xcopy /Y /D "$(LightCoreDir)TargetCore.dll" "$(OutDir)"
+xcopy /Y /D "$(LightCoreDir)Targetcore.dll" "$(OutDir)"
 xcopy /Y /D "$(LightCoreDir)Msgcore.dll" "$(OutDir)"</Command>
       <Message>staging facade + kernel DLLs</Message>
     </PostBuildEvent>

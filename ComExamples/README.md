@@ -54,13 +54,13 @@ source check; descendant and unrelated links are unchanged.
 Nothing in the COM layer was ever involved — the same failure appeared in the C++
 facade, C# and Java trees, and the fix was one predicate in the kernel.
 
-## Note on TargetCore's flat C API
+## Note on Targetcore's flat C API
 
-The numbers above were taken after `TargetCore_c.{h,cpp,_u8.cpp}` — the flat
-`extern "C"` / Panama surface — was removed from `TargetCore.dll` on 2026-08-13.
+The numbers above were taken after `Targetcore_c.{h,cpp,_u8.cpp}` — the flat
+`extern "C"` / Panama surface — was removed from `Targetcore.dll` on 2026-08-13.
 Nothing here used it: `TargetCom.dll` imports only `TargetFacade.dll`, and not
 one of the layer's 74 symbols. Removing it changed no result in this tree. The
-sources are preserved in `MSCS_JavaBindings\TargetCore\native\`.
+sources are preserved in `MSCS_JavaBindings\Targetcore\native\`.
 
 `run_all.ps1` registers with `regsvr32 /n /i:user`, i.e. `HKCU\Software\Classes`
 only: no elevation, nothing machine-wide, always removed again. It registers the
@@ -127,7 +127,7 @@ relationship with the framework**, and that is the whole point of the layer:
 
 | | links | includes | finds the implementation |
 |---|---|---|---|
-| `DirectExamples` | `TargetCore.lib` + `Msgcore.lib` | four kernel headers, MFC | at link time |
+| `DirectExamples` | `Targetcore.lib` + `Msgcore.lib` | four kernel headers, MFC | at link time |
 | `FacadeExamples` | `TargetFacade.lib` | one header | at link time |
 | `ComExamples` | **nothing** — `ole32`/`oleaut32`/`uuid` | the type library | **in the registry, at run time** |
 

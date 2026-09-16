@@ -1,6 +1,6 @@
-# `_TargetCore_UseExamples`
+# `_Targetcore_UseExamples`
 
-Worked examples for **TargetCore** — the MSCS message *transport* library:
+Worked examples for **Targetcore** — the MSCS message *transport* library:
 `P2PeerHub`s, the pump threads that drive them, the `P2PeerCon` transports that
 join them, the login handshake, and `P2PeerMsg` routing between them.
 
@@ -11,9 +11,9 @@ and the difference you are looking at is the *binding*, never the material. The
 questions asked, the verdicts printed and the exit codes returned are the same
 in all five, deliberately, so a disagreement between two trees is a finding.
 
-| Tree | Language | Reaches TargetCore through | Built by |
+| Tree | Language | Reaches Targetcore through | Built by |
 | --- | --- | --- | --- |
-| [`DirectExamples`](DirectExamples) | C++ | `TargetCore.lib` and MFC — the C++ classes themselves | `DirectExamples(2026).sln` |
+| [`DirectExamples`](DirectExamples) | C++ | `Targetcore.lib` and MFC — the C++ classes themselves | `DirectExamples(2026).sln` |
 | [`FacadeExamples`](FacadeExamples) | C++ | `TargetFacade.dll`, a macro-free flat-vtable facade | `FacadeExamples(2026).sln` |
 | [`ComExamples`](ComExamples) | C++ (+ PowerShell, VBScript) | `TargetCom`, an ATL dual-interface COM server over the facade | `ComExamples(2026).sln` |
 | [`dotNetExamples`](dotNetExamples) | C# | the same COM server, by vtable and late-bound | `build.ps1` (Roslyn `csc`) |
@@ -67,7 +67,7 @@ can be re-implemented. The lineage runs
 | 9 | `PipeMsgFactoryTest` | `P2PeerConPipe` | the same round trip built through a redirect factory instead of by hand |
 | 10 | `TwoConTest` | `P2PeerConWsa` ×2 | can **one** hub supervise two connections and log in to itself? |
 | 11 | `ExplorerTest` | `P2PeerConWsa` | standing up an explorer expump, and the four rules a client has to obey to talk to one |
-| 12 | `RouteLoopbackTest` | none | the outlier: routing in the `treehub_runtime` engine — no TargetCore, no MFC |
+| 12 | `RouteLoopbackTest` | none | the outlier: routing in the `treehub_runtime` engine — no Targetcore, no MFC |
 
 Every harness except `AlexTest` reports its verdict as the process exit code, so
 a headless run is unambiguous:
@@ -92,7 +92,7 @@ runs it; `AlexInterop` is the automatable rewrite. See
 
 Twelve MFC-dynamic console harnesses written straight against the exported C++
 classes: `P2PeerHub`, `P2PeerCon` and its five transports, `P2PeerMsg` and the
-message map. They link `TargetCore.lib` and `Msgcore.lib`, and none of them
+message map. They link `Targetcore.lib` and `Msgcore.lib`, and none of them
 opens a payload — to this tree a message body is an opaque byte range.
 
 This is the reference tree, and the only one that documents most harnesses in
@@ -182,11 +182,11 @@ project that is not part of the MSCS tree at all.
 None of these trees builds standalone, and that is a property of the material
 rather than an oversight. Every path below is **relative**, resolved from a
 project file at `<repo>/<Tree>/<Harness>/`, and assumes this repository is
-checked out inside the parent MSCS solution as `MSCS\_TargetCore_UseExamples`:
+checked out inside the parent MSCS solution as `MSCS\_Targetcore_UseExamples`:
 
 | | Reached | Wanted by |
 | - | ------- | --------- |
-| 1 | `..\..\..\Msgcore`, `..\..\..\TargetCore` | headers, at compile time — the three MSBuild trees that link the library itself: `DirectExamples`, `ErrorReportingExamples`, `SecurityExamples` |
+| 1 | `..\..\..\Msgcore`, `..\..\..\Targetcore` | headers, at compile time — the three MSBuild trees that link the library itself: `DirectExamples`, `ErrorReportingExamples`, `SecurityExamples` |
 | 2 | `..\..\..\lib\$(Platform)\$(Configuration)\*.lib` | import libraries, at link time — the same three |
 | 3 | `..\..\..\bin\$(Configuration)64\*.dll` | staged by a post-build `xcopy`, at run time |
 | 4 | `..\..\..\vsutils\DelayLoadReport.cpp` | compiled in, to report a `/DELAYLOAD` fault legibly |
@@ -202,7 +202,7 @@ own, and both gained a level on the way in.
 reason: a level lost in a move fails there, on a runner with no compiler, in
 seconds — instead of surfacing as `LNK1181` on somebody's machine.
 
-`vsutils\` is **not published anywhere**, and `Msgcore`, `TargetCore` and
+`vsutils\` is **not published anywhere**, and `Msgcore`, `Targetcore` and
 `TargetFacade` are private repositories. See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 and the two workflows for what that means for CI.
 

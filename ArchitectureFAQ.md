@@ -3,8 +3,8 @@
 Questions that came up while reading `DmxMeshTest`, answered from the source — and then
 again, once the same harness existed three times over.
 
-**Conventions.** File references are relative to the MSCS root (`TargetCore/P2Pwin32.cpp`,
-`_TargetCore_UseExamples/DirectExamples/DmxMeshTest/DmxMeshTest.cpp`). Line numbers were accurate at the time of
+**Conventions.** File references are relative to the MSCS root (`Targetcore/P2Pwin32.cpp`,
+`_Targetcore_UseExamples/DirectExamples/DmxMeshTest/DmxMeshTest.cpp`). Line numbers were accurate at the time of
 writing and will drift — treat them as a starting point, and search for the quoted code if a
 reference misses.
 
@@ -19,19 +19,19 @@ and is true underneath all five; Part II is about what each layer changes.
 
 | Tree | Written against | Links | Finds the implementation |
 | ---- | --------------- | ----- | ------------------------ |
-| [`DirectExamples`](DirectExamples) | **TargetCore** directly — `P2PeerHub`, `P2PeerCon`, `P2PeerMsg`, MFC | `TargetCore.lib` + `Msgcore.lib` | link time |
+| [`DirectExamples`](DirectExamples) | **Targetcore** directly — `P2PeerHub`, `P2PeerCon`, `P2PeerMsg`, MFC | `Targetcore.lib` + `Msgcore.lib` | link time |
 | [`FacadeExamples`](FacadeExamples) | **TargetFacade** — one header, flat vtable ABI, HRESULTs | `TargetFacade.lib` | link time |
 | [`ComExamples`](ComExamples) | **TargetCom** — ATL dual interfaces, connection-point events | *nothing of MSCS* — `ole32`/`oleaut32`/`uuid` | **the registry, at run time** |
 | [`dotNetExamples`](dotNetExamples) | the same **TargetCom**, from C# | *nothing of MSCS* — a CCW per object | the registry, at run time |
 | [`PanamaJavaExamples`](PanamaJavaExamples) | the same **TargetFacade**, from Java | *nothing at all* — Panama reads the raw vtables | `LoadLibrary`, at run time |
 
 They are stacked, not parallel: `TargetCom` is a COM layer over `TargetFacade`, which is a
-facade over `TargetCore`. A message sent from the COM tree traverses all three.
+facade over `Targetcore`. A message sent from the COM tree traverses all three.
 
 ```
 ComExamples, dotNetExamples      ──> TargetCom.dll      (BSTR / VARIANT / IDispatch)
 FacadeExamples, PanamaJavaExamples ─> TargetFacade.dll  (flat vtable, HRESULT)
-DirectExamples                   ──> TargetCore.dll ──> Msgcore.dll
+DirectExamples                   ──> Targetcore.dll ──> Msgcore.dll
 ```
 
 Each tree carries its own `README.md` with the harness-by-harness mapping and its test
@@ -80,8 +80,8 @@ WSAStartup(MAKEWORD(2, 2), &oWsaData);      // DmxMeshTest.cpp:192
 **It is boilerplate, and this particular test does not need it.**
 
 `StartupP2Pmsg()` never touches Winsock. The only place the core initialises it for you is
-`P2PeerService::Run()` (`TargetCore/P2PeerService.cpp:678`), and a directly-driven hub never
-goes through that. Hence the standard block documented in `TargetCore/examples.md:131-137`:
+`P2PeerService::Run()` (`Targetcore/P2PeerService.cpp:678`), and a directly-driven hub never
+goes through that. Hence the standard block documented in `Targetcore/examples.md:131-137`:
 
 ```cpp
 if (!StartupP2Pmsg(16)) { /* fatal */ }
@@ -145,7 +145,7 @@ if ( s_ThreadID_P2PmsgHub.GetCount() >= (INT_PTR)s_uxP2PmsgHubMgr )
    EVERR->MODULE->Message("Attempt to exceed configured hub limit (%i)", ...)->Throw();
 ```
 
-> **Doc bug:** `TargetCore/examples.md` glosses the argument as "pump/thread pool hint". That
+> **Doc bug:** `Targetcore/examples.md` glosses the argument as "pump/thread pool hint". That
 > is wrong — it has nothing to do with pumps or a thread pool.
 
 ### Why 16
@@ -580,7 +580,7 @@ what the sink is swallowing, and a log line in `ON_P2PeerCon_CLOSE` to catch the
 `:3282`, so a dropped connection leaves a trace but a layer-3 pump death does not.
 
 > **In the Light and COM trees:** all four layers are still there and still behave exactly as
-> described — they are inside `TargetCore`, and the facade does not intercept them. What
+> described — they are inside `Targetcore`, and the facade does not intercept them. What
 > changes is the fifth layer the facade adds at its own boundary: every exported method is
 > wrapped, so **no exception ever crosses the ABI**. A `Msgexception` from the kernel becomes
 > an `HRESULT` return; the `p2pf::IP2PHubEvents` sink is invoked inside that wrapper, so a
@@ -588,7 +588,7 @@ what the sink is swallowing, and a log line in `ON_P2PeerCon_CLOSE` to catch the
 > (layer 3).
 >
 > That closes the "pump dies quietly" hole from the client's side but not the kernel's: a
-> layer-3 death originating *inside* TargetCore still stalls the hub silently, and the
+> layer-3 death originating *inside* Targetcore still stalls the hub silently, and the
 > symptom is still an exit 3 that looks like a slow handshake. The facade gives you one more
 > place to look — `onError`, which surfaces the kernel's diagnostics as text. Both Light and
 > COM harnesses register it on every hub for exactly that reason, and it is how
@@ -783,7 +783,7 @@ a pump that dies (layer-3 exception) stalls the alternation with no error on the
 > client's view of the last leg of the diagram above. The seven `On_Con*` trace overrides the
 > originals carried — `On_ConStartup`, `On_ConConnect`, `On_ConAccept`, `On_ConListen`,
 > `On_ConLogin`, `On_ConClose`, `On_ConShutdown` — have no facade equivalent at all. **If you
-> need to watch the handshake leg by leg, that is a reason to use TargetCore directly**; the
+> need to watch the handshake leg by leg, that is a reason to use Targetcore directly**; the
 > facade deliberately reports only the two edges that matter to an application, `onPeerUp`
 > and `onPeerDown`.
 >
@@ -859,16 +859,16 @@ Start from what your client is, not from what the framework offers.
 | ------- | --- | ------- |
 | are writing a script, a VBA macro, a .NET app, or anything you would rather not compile against a C++ SDK | **COM** | no build-time dependency on MSCS at all |
 | are writing C++ and want the messaging without the framework | **facade** | one header, one import lib, no MFC, no macros |
-| need `PostP2Pmsg` pump injection, the `P2PeerMsg` factories, custom `P2PeerCon` subclasses, the priority queue, or the `On_Con*` handshake legs | **TargetCore** | none of that exists above it — see [Q17](#17-what-can-the-layers-not-do) |
-| are working the Linux port | **TargetCore** | the facade is a Windows MFC DLL; COM adds the registry and apartments on top |
-| are debugging the kernel itself | **TargetCore** | the layers hide exactly the machinery you need to see |
+| need `PostP2Pmsg` pump injection, the `P2PeerMsg` factories, custom `P2PeerCon` subclasses, the priority queue, or the `On_Con*` handshake legs | **Targetcore** | none of that exists above it — see [Q17](#17-what-can-the-layers-not-do) |
+| are working the Linux port | **Targetcore** | the facade is a Windows MFC DLL; COM adds the registry and apartments on top |
+| are debugging the kernel itself | **Targetcore** | the layers hide exactly the machinery you need to see |
 
-The layers are additive in cost and subtractive in reach. Nothing above TargetCore can do
-anything TargetCore cannot; the question is only how much of it you need.
+The layers are additive in cost and subtractive in reach. Nothing above Targetcore can do
+anything Targetcore cannot; the question is only how much of it you need.
 
 Concretely, from the three trees' own harnesses (non-comment, non-blank lines, all eleven):
 
-| | TargetCore | facade | COM |
+| | Targetcore | facade | COM |
 | --- | ---: | ---: | ---: |
 | harness code | 2376 | 922 | 827 |
 | shared helper | — | 79 | 387 |
@@ -965,7 +965,7 @@ equivalent above the kernel, and neither does the ownership hazard they came wit
 
 Different in all three trees, and it is the single most important difference between them.
 
-**TargetCore — the pump thread that owns the connection.** Q8 and Q9 in full: your `On_*`
+**Targetcore — the pump thread that owns the connection.** Q8 and Q9 in full: your `On_*`
 handler runs on the hub pump thread, the same one that took the IOCP completion, with
 connection-to-pump affinity established on first completion.
 
@@ -999,7 +999,7 @@ Three consequences worth knowing:
   Every COM harness runs STA on purpose and `com::Gate::wait()` pumps; you can see it in the
   logs, where each delivery line carries the same `tid=` as `main`.
 
-| | TargetCore | facade | COM (STA client) |
+| | Targetcore | facade | COM (STA client) |
 | --- | --- | --- | --- |
 | handler runs on | hub pump thread | hub pump thread | **your** thread, in the pump |
 | threads per hub | 1 | 1 | 2 (pump + dispatch) |
@@ -1135,7 +1135,7 @@ from the *kernel* — the facade's `HasDroppedOut` override in Q15 exists precis
 
 The error surface, layer by layer:
 
-| | TargetCore | facade | COM |
+| | Targetcore | facade | COM |
 | --- | --- | --- | --- |
 | call failed | `BOOL`, or a thrown `Msgexception` | `HRESULT` | `HRESULT` → `COMException` / `Err.Number` |
 | duplicate peer | `PostP2PeerCon` returns `FALSE`; reason is in the source | `P2PF_E_CON_DUPLICATE` | same value, `0x80040204`, out to scripts |
@@ -1207,7 +1207,7 @@ works from VBA, from an Excel macro and from a logon script.
 
 ### Across the three trees
 
-| | TargetCore | facade | COM |
+| | Targetcore | facade | COM |
 | --- | --- | --- | --- |
 | One hub is | a `P2PeerHub` + 1 thread | the same, hidden | the same, **+1 dispatch thread** |
 | Hubs per process | your `StartupP2Pmsg(n)`, up to 256 | **16**, hardcoded | **16**, hardcoded |

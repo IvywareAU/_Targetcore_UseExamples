@@ -1,4 +1,4 @@
-# P2Pmsg.cfg -- TargetCore / Msgcore diagnostic output, sample
+# P2Pmsg.cfg -- Targetcore / Msgcore diagnostic output, sample
 #
 # COPY THIS FILE next to the executable you want to configure and rename it to
 # exactly "P2Pmsg.cfg". It is deliberately NOT named that here and is NOT copied

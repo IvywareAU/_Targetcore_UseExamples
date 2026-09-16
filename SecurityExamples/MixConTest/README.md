@@ -97,7 +97,7 @@ identities are distinct — transport type is irrelevant.**
 
 ## Security defaults: two opt-outs this test needs
 
-Both are recent breaking changes in `TargetCore`, both must be configured **before** `SpawnHub()`,
+Both are recent breaking changes in `Targetcore`, both must be configured **before** `SpawnHub()`,
 and neither has anything to do with transports. This binary probes connectivity — not who may
 speak, nor what may be read — so it takes the documented one-line migration for each.
 
@@ -105,7 +105,7 @@ speak, nor what may be read — so it takes the documented one-line migration fo
 
 Peer login authentication is **required by default** (Stage 3 step 8). The very first act of
 `SpawnHub()`, before the pump thread exists, is to check the hub can enforce what it requires
-(`TargetCore/P2PeerHub.cpp:187`):
+(`Targetcore/P2PeerHub.cpp:187`):
 
 ```cpp
 if ( !AuthArmOrRefuse ( _T(__FUNCTION__) ) )
@@ -122,7 +122,7 @@ P2PeerHub(MixConTest.HubA) will not arm: no identity key - SetIdentity(path,true
 ADVICE  : Auth is required by default (Stage 3 step 8). Provision this hub, or RequireAuth(false) and mean it.
 ```
 
-`AuthPolicy::Arm()` (`TargetCore/P2PAuthLogin.cpp:660`) refuses one reason at a time and in order —
+`AuthPolicy::Arm()` (`Targetcore/P2PAuthLogin.cpp:660`) refuses one reason at a time and in order —
 identity, then allow-list, then that the allow-list loads and names somebody, then revocation — so
 provisioning *only* an identity moves the refusal to the next gate rather than clearing it. The
 in-tree twin of this test, `MscsUnitTests/mix_con.cpp:221`, takes the same `RequireAuth(false)`
@@ -135,7 +135,7 @@ Note that `AuthArm()` now reports **`ArmNotRequired`**, deliberately not `ArmOk`
 
 Body sealing is required by default too (Stage 3 step 20), but an unprovisioned hub is **not**
 refused. The check sits *inside* the success branch of `AuthArmOrRefuse`
-(`TargetCore/P2PeerHub.cpp:2209-2229`, which `return true`s): such a hub still arms, still logs
+(`Targetcore/P2PeerHub.cpp:2209-2229`, which `return true`s): such a hub still arms, still logs
 peers in and still talks to its direct peers; what it cannot do is *open* a body sealed to it, and
 a relay is entitled to be in exactly that state. It warns and starts:
 
@@ -148,12 +148,12 @@ ADVICE  : It cannot open a body sealed to it. SetAgreementKey(path,true), or Req
 Two things worth knowing about that output:
 
 - **It is a warning wearing an error's label.** The code emits `EVWRN`
-  (`TargetCore/P2PeerHub.cpp:2221`); the stderr fallback renderer
+  (`Targetcore/P2PeerHub.cpp:2221`); the stderr fallback renderer
   (`Msgcore/Msgexception.cpp:1811`) prints `DEBUG` for DEBUG, `TRACE` for TRACE, and `ERROR` for
   *everything else* — WARNING included. The reported caller also changes from `SpawnHub()` to
   `AuthArmOrRefuse()`, which is how to tell the two diagnostics apart at a glance.
 - **It could never have affected this test.** `SealAppMsgOutbound`
-  (`TargetCore/P2PeerCon.cpp:2773`) returns early when the link is the last hop —
+  (`Targetcore/P2PeerCon.cpp:2773`) returns early when the link is the last hop —
   `if ( m_oThatP2Paddr == strScope ) return true;` — and for a unicast `GetScopeOrDestin()` *is*
   `GetDestin()`. Every message here is single-hop: HubA→HubB rides the con whose far end *is*
   `MixConTest.HubB`. No seal is ever attempted. Nor do these count as broadcasts — `HasScope()` is
@@ -173,13 +173,13 @@ msbuild "MixConTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 # run: ..\out\x64\Debug\MixConTest.exe
 ```
 
-Like the rest of the repository it references the sibling `Msgcore` and `TargetCore` checkouts
+Like the rest of the repository it references the sibling `Msgcore` and `Targetcore` checkouts
 through `..\..\..\` — **three** levels, because this harness sits at
 `<repo>\SecurityExamples\MixConTest\` — takes its import libraries from `..\..\..\lib`, and stages
-`TargetCore.dll` and `Msgcore.dll` out of `..\..\..\bin\<Config>64` in a post-build step. Nothing
-needs copying by hand; that step fails loudly when the DLLs are not there, because `TargetCore` is
+`Targetcore.dll` and `Msgcore.dll` out of `..\..\..\bin\<Config>64` in a post-build step. Nothing
+needs copying by hand; that step fails loudly when the DLLs are not there, because `Targetcore` is
 delay-loaded and the alternative is `0xC06D007E` at startup with nothing to read. Build `Msgcore`
-and `TargetCore` first.
+and `Targetcore` first.
 
 > **Console note.** Unlike `DirectExamples\TwoConTest`, this harness deliberately does **not** put stdout in
 > `_O_U16TEXT` mode: with the pipe transport active, wide/narrow stdio writes mix on stdout and a

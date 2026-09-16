@@ -15,7 +15,7 @@
 //
 // PipeMsgMapTest.cpp
 //
-// SINGLE-PROCESS, TWO-HUB named-pipe request/response probe for TargetCore,
+// SINGLE-PROCESS, TWO-HUB named-pipe request/response probe for Targetcore,
 // demonstrating P2PeerMsg_MAP routing of application-defined messages.
 //
 // What this harness shows:
@@ -31,7 +31,7 @@
 //   client --HubPing--> [pipe] --> server.On_HubPing
 //   server --HubPong--> [pipe] --> client.On_HubPong  => DONE
 //
-// Routing rule exercised (verbatim from the TargetCore contract):
+// Routing rule exercised (verbatim from the Targetcore contract):
 //   "Any P2PeerMsg objects for which the destination address matches the hub
 //    address are pumped through the hub P2PeerTarget hierarchy until a
 //    matching handler is located."

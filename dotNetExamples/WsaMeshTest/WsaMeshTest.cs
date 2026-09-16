@@ -21,7 +21,7 @@
 // Same question and same verdict as the other three trees. What is different is
 // again not the messaging -- it is the build-time relationship with MSCS:
 //
-//   DirectExamples       links TargetCore.lib + Msgcore.lib, includes four
+//   DirectExamples       links Targetcore.lib + Msgcore.lib, includes four
 //                          kernel headers, needs MFC
 //   FacadeExamples  links TargetFacade.lib, includes one header
 //   ComExamples    links NOTHING. ole32/oleaut32/uuid and a type library

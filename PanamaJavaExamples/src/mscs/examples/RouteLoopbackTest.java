@@ -26,13 +26,13 @@
 //          Leaf
 //
 // READ THIS FIRST: THE ORIGINAL IS NOT AN MSCS HARNESS. Every other example in
-// DirectExamples drives TargetCore. RouteLoopbackTest does not: it exercises
+// DirectExamples drives Targetcore. RouteLoopbackTest does not: it exercises
 // treehub_runtime's PeerNetwork::route(), the clean-room in-process router the
 // code generator emits generated projects against, with no P2PeerHub, no
 // PostP2Pmsg and no pump thread anywhere. Its own header says so.
 //
 // So there is no facade translation of that code -- there is nothing of
-// TargetCore in it to put a facade over. What this file does instead, following
+// Targetcore in it to put a facade over. What this file does instead, following
 // the Light tree, is ask the original's QUESTION of the real kernel: build the
 // same four-node tree out of facade hubs, wire the same parent<->child edges
 // over Dmx (the in-process transport, closest to route()'s DIRECT

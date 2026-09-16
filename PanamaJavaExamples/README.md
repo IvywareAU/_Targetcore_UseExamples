@@ -28,7 +28,7 @@ There is a caveat on the Release number, and it is not new: see
 
 | | links / references | binds to the implementation |
 |---|---|---|
-| `DirectExamples` | `TargetCore.lib` + `Msgcore.lib`, MFC | at link time |
+| `DirectExamples` | `Targetcore.lib` + `Msgcore.lib`, MFC | at link time |
 | `FacadeExamples` | `TargetFacade.lib` | at link time |
 | `ComExamples` | `ole32`/`oleaut32`/`uuid` + the type library | registry, at run time |
 | `dotNetExamples` | `mscorlib` / `System` / `System.Core` | registry, at run time |
@@ -90,7 +90,7 @@ from one a C++ compiler emitted.
 Every string on this ABI is a NUL-terminated `wchar_t*`, which on Windows is
 UTF-16 — `java.lang.String`'s own encoding. The conversion is a copy, not a
 transcode, and a Java consumer of MSCS pays nothing for the kernel's Unicode
-build. (The `_u8` surface `TargetCore_c.h` publishes for portability exists
+build. (The `_u8` surface `Targetcore_c.h` publishes for portability exists
 because `wchar_t` is UTF-32 on Linux; here it would be pure overhead.)
 
 ### The one thing nothing checks
@@ -266,7 +266,7 @@ and B but not Leaf — though that check only asserts the direct children, so [4
 still passed.
 
 It was never caused by the flat-C removal: verified by rebuilding the kernel
-**with** `TargetCore_c.*` restored and re-running, where the failure was
+**with** `Targetcore_c.*` restored and re-running, where the failure was
 identical.
 
 **Fixed** (`P2PeerCon.cpp`, 2026-08-13): an **ancestor link is admitted without a
@@ -316,7 +316,7 @@ The single-process harnesses never fault, in either configuration, in any tree.
 
 ### An MFC extension DLL initialises inside a bare JVM
 
-`TargetCore.dll` is an **MFC extension DLL**: its `DllMain` calls
+`Targetcore.dll` is an **MFC extension DLL**: its `DllMain` calls
 `AfxInitExtensionModule` and `new CDynLinkLibrary(...)`, which need MFC's module
 and thread state. `AlexTest/README.md` records the concern that this state is set
 up by the `CWinApp theApp` global — and the Light tree's `AlexInterop` resolved
@@ -328,7 +328,7 @@ own, no `/DELAYLOAD` linkage, and loads the DLL from a JIT-compiled thread long
 after startup. **It works** — first run, no special flags:
 
 ```
-[02:52:22.960 tid=1  MAIN]   facade : TargetFacade ABI 10 / TargetCore(2026)
+[02:52:22.960 tid=1  MAIN]   facade : TargetFacade ABI 10 / Targetcore(2026)
 [02:52:23.024 tid=21 SERVER] peer up   : WsaMesh.Client
 [02:52:23.025 tid=22 CLIENT] peer up   : WsaMesh.Server - loopback TCP connection ready
 ```
@@ -403,7 +403,7 @@ here because the logs in `logs\Release\*.err.txt` look corrupted and are not.
 |---|---|
 | JDK | **22 or later** — `java.lang.foreign` left preview in 22. Verified on Temurin/Oracle **23.0.2**. `build.ps1` refuses anything older. |
 | Platform | **x64 Windows only.** See `AlexInterop` above. |
-| TargetFacade | built for `x64\<Config>`; `build.ps1` stages `TargetFacade.dll`, `TargetCore.dll` and `Msgcore.dll` into `bin\<Config>` |
+| TargetFacade | built for `x64\<Config>`; `build.ps1` stages `TargetFacade.dll`, `Targetcore.dll` and `Msgcore.dll` into `bin\<Config>` |
 | ABI | **10**, and the factory accepts 4–10. Re-check `Abi.java` against `TargetFacade.h` if the facade's ABI moves. |
 | `Com232MeshTest` | a com0com null-modem pair on COM5↔COM6 — `setupc install PortName=COM5 PortName=COM6`. Without one it reports SETUP (exit 1), which `run_all.ps1` counts separately from a failure. |
 
@@ -437,7 +437,7 @@ a source list is the whole build, and adding a build tool would only obscure tha
 ## Verified results
 
 Toolchain: JDK 23.0.2 (Temurin 23.0.2+7-58), `javac 23.0.2`, x64.
-Facade: `TargetFacade ABI 10 / TargetCore(2026)`, staged from
+Facade: `TargetFacade ABI 10 / Targetcore(2026)`, staged from
 `TargetFacade\out\x64\<Config>`.
 
 | Harness | Debug | Release |
@@ -462,31 +462,31 @@ Net) and 15/15 (Com) on the same kernel.
 The post-verdict Release teardown fault on `AlexInterop (client)`
 is measured separately at 4 runs in 6, as above.
 
-### A note on TargetCore's flat C API
+### A note on Targetcore's flat C API
 
-These numbers were taken **while** `TargetCore_c.{h,cpp,_u8.cpp}` — the flat
-`extern "C"` / Panama surface — was removed from `TargetCore.dll`, and they did
+These numbers were taken **while** `Targetcore_c.{h,cpp,_u8.cpp}` — the flat
+`extern "C"` / Panama surface — was removed from `Targetcore.dll`, and they did
 not move. Nothing in this tree used it: Java reaches the kernel through the
 facade's vtables, not through that layer, so the symbols it exported were never
 on this tree's path.
 
 **It is back in the library, and it is the authoritative copy.**
 `MSCS_JavaBindings` generates its bindings by running jextract over that header,
-so it has to be the one that is compiled — see `TargetCore/CMakeLists.txt`, which
+so it has to be the one that is compiled — see `Targetcore/CMakeLists.txt`, which
 records the removal and the reversal: *the absence of an in-tree consumer is a
 fact about this repository, not about the API; the consumer is out-of-tree by
 construction, which is what an FFI surface is for.* It exports **101** entry
 points as of 2026-09-08, not the 74 an earlier draft of this note recorded.
 
-Those sources live in `MSCS\TargetCore\`. An earlier draft pointed here instead at
-`MSCS_JavaBindings\TargetCore\native\`, which no longer exists: it held a
+Those sources live in `MSCS\Targetcore\`. An earlier draft pointed here instead at
+`MSCS_JavaBindings\Targetcore\native\`, which no longer exists: it held a
 byte-identical second copy, deleted on 2026-08-14 for the reason second copies
 get deleted — the one over there had fallen behind the handle registry, so the
 bindings tree documented a library several fixes older than the one it loaded.
 
 The two Java routes bind different things and neither supersedes the other. This
 tree calls `TargetFacade.dll` vtable slots through hand-transcribed indices;
-`MSCS_JavaBindings` calls `TargetCore.dll` / `Msgcore.dll` flat exports through
+`MSCS_JavaBindings` calls `Targetcore.dll` / `Msgcore.dll` flat exports through
 generated bindings checked by an ABI coverage gate.
 
 ## License

@@ -44,7 +44,7 @@ That is why there are three hubs and not one; `../MixConTest/README.md` has the 
 ## What "provisioned" means, in the order the gate checks it
 
 `SpawnHub()` calls `AuthArmOrRefuse()` **before the pump thread exists**
-(`TargetCore/P2PeerHub.cpp:187`) — the alternative being a pump thread that starts, refuses every
+(`Targetcore/P2PeerHub.cpp:187`) — the alternative being a pump thread that starts, refuses every
 peer, and looks healthy from outside. `AuthArm()` refuses **one reason at a time, in order**, so
 satisfying one moves the refusal to the next rather than clearing it:
 
@@ -84,7 +84,7 @@ tree is never picked up silently.
 ## What `RequireSeal(true)` does — and does not do — here
 
 **Nothing in this test is ever sealed, and that is correct rather than a gap.**
-`P2PeerCon::SealAppMsgOutbound` (`TargetCore/P2PeerCon.cpp:2773`) returns early when the link is the
+`P2PeerCon::SealAppMsgOutbound` (`Targetcore/P2PeerCon.cpp:2773`) returns early when the link is the
 last hop — `if ( m_oThatP2Paddr == strScope ) return true;` — and every message here is single-hop:
 HubA→HubB rides the connection whose far end *is* HubB. Sealing engages when a body must cross an
 **intermediate** hub, and this topology has none.
@@ -143,7 +143,7 @@ msbuild "MixConTestAuth(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 # run: ..\out\x64\Debug\MixConTestAuth.exe   (keys land beside it, in p2p\)
 ```
 
-Mirrors `../MixConTest` exactly: references the sibling `Msgcore` and `TargetCore` checkouts
+Mirrors `../MixConTest` exactly: references the sibling `Msgcore` and `Targetcore` checkouts
 through `..\..\..\` — **three** levels, this harness sitting at
 `<repo>\SecurityExamples\MixConTestAuth\` — takes its import libraries from `..\..\..\lib`, and
 stages both DLLs from `..\..\..\bin\<Config>64` in a post-build step that fails loudly when they

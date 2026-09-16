@@ -79,7 +79,7 @@ This is not unusual, incidentally: **41 of the 204** sources registered on a
 stock Windows 11 machine ship no message file at all.
 
 This example does not carry its own catalogue. It points `EventMessageFile` at
-**`TargetCore.dll`**, which carries one built from `TargetCore/TargetCoreEvt.mc`
+**`Targetcore.dll`**, which carries one built from `Targetcore/TargetcoreEvt.mc`
 whose entries take two insertion strings and render them verbatim — `%1` the
 origin, `%2` the message. That is all an application needs to get its own text
 into the log, and it means this example adds no `mc.exe` step to any build.
@@ -106,10 +106,10 @@ rather than a table that can drift from the enum:
 
 ## Building
 
-Needs `TargetCore.dll` and `Msgcore.dll` in `..\..\..\bin\<Configuration>64`,
+Needs `Targetcore.dll` and `Msgcore.dll` in `..\..\..\bin\<Configuration>64`,
 as every example tree here does — the post-build step stages them beside the
 executable and **fails the build** if the kernel is missing, because
-`TargetCore` is delay-loaded and the failure would otherwise be `0xC06D007E` at
+`Targetcore` is delay-loaded and the failure would otherwise be `0xC06D007E` at
 startup. For this example the DLL matters twice over: it also carries the
 message table that `EventMessageFile` points at.
 
@@ -118,7 +118,7 @@ msbuild "ErrorReportingExamples(2026).sln" -p:Configuration=Debug -p:Platform=x6
 ```
 
 > If the events you get are unformatted **and** you registered the source, check
-> that the staged `TargetCore.dll` is a build that actually contains the message
+> that the staged `Targetcore.dll` is a build that actually contains the message
 > table — it was added on 2026-08-17. A DLL older than that has no table, and
 > `EventMessageFile` will point at a module that cannot format anything.
 

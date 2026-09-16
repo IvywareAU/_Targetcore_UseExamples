@@ -18,7 +18,7 @@
 //
 //  WHAT THIS DEMONSTRATES
 //
-//  TargetCore reads a plain text file, P2Pmsg.cfg, beside the host executable:
+//  Targetcore reads a plain text file, P2Pmsg.cfg, beside the host executable:
 //
 //      ErrToMessageBox: 1        # 1/0, on/off, yes/no, true/false
 //      LogFile: errorLog.txt     # relative to THIS file's folder
@@ -332,7 +332,7 @@ TestDialogOnStillLogs ( LPCWSTR lpszWorkDir )
     // is nowadays a no-op - kept, because this example is about being explicit
     // and because a default is a thing that can change again. It used to be
     // ERROR alone, which made every warning in the libraries invisible; that
-    // was TargetCore's finding F-S6-4.
+    // was Targetcore's finding F-S6-4.
     //   Worth knowing beyond this example: turning the dialog off does not
     // turn reporting ON. The two are separate configurations and neither
     // implies the other.

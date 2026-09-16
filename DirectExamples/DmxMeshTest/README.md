@@ -6,7 +6,7 @@ A single-process, **two-hub in-process CONNECTION** example using `P2PeerConDmx`
 Unlike [`LocalInMemoryTest`](../LocalInMemoryTest) (which bypasses connections
 entirely and injects straight onto a hub pump via `PostP2Pmsg`), this harness
 drives a **real `P2PeerCon`**: two `P2PeerHub`s in one process establish a
-`P2PeerConDmx` service⇄client connection, run the full TargetCore **login
+`P2PeerConDmx` service⇄client connection, run the full Targetcore **login
 handshake**, and exchange a BCast over the connection — with no socket, no
 named pipe, and no OS handle. Endpoints are matched by a shared **service name**
 string via a process-global registry (`g_oCListP2PeerConDmx`).
@@ -19,7 +19,7 @@ from `P2PeerConPipe` to `P2PeerConDmx`.
 `P2PeerConDmx` had never actually worked. Building this harness against the
 stock lib produced `On_ConStartup → On_ConAccept` then an immediate
 `On_ConClose` of the accepted connection, no login. Two defects in
-`TargetCore` were fixed (see the commit / the `mscs-inprocess-mesh` note):
+`Targetcore` were fixed (see the commit / the `mscs-inprocess-mesh` note):
 
 1. **`P2PeerConDmx::OnAccept()` never armed the accepted con's receive.**
    `AcceptSpawn()` clears `ConState_Recv|Send` and leaves the spawn with no
@@ -52,13 +52,13 @@ msbuild "DmxMeshTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 x64\Debug\DmxMeshTest.exe
 ```
 
-The solution references the sibling `Msgcore` and `TargetCore` projects and
+The solution references the sibling `Msgcore` and `Targetcore` projects and
 links their `.lib`s from `..\..\..\lib`; the post-build copies the `Msgcore`
-DLLs **and** `TargetCore.dll` (from `%WDMSCS_DEBUG%`) next to the exe, so
+DLLs **and** `Targetcore.dll` (from `%WDMSCS_DEBUG%`) next to the exe, so
 it runs standalone.
 
-> After changing `P2PeerConDmx.cpp` / `P2PeerioDmx.cpp`, rebuild `TargetCore`
-> first, then copy `TargetCore\x64\Debug\TargetCore.dll` to
+> After changing `P2PeerConDmx.cpp` / `P2PeerioDmx.cpp`, rebuild `Targetcore`
+> first, then copy `Targetcore\x64\Debug\Targetcore.dll` to
 > `%WDMSCS_DEBUG%` (`..\..\..\bin\Debug64`) — the `.lib` auto-updates in `..\..\..\lib`
 > but the DLL does not.
 

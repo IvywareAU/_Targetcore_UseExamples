@@ -1,6 +1,6 @@
 # LocalInMemoryTest
 
-A single-process, **two-hub in-memory** delivery example for TargetCore.
+A single-process, **two-hub in-memory** delivery example for Targetcore.
 
 Two `P2PeerHub`s live in one process, each on its own `SpawnHub()` pump
 thread, and exchange `P2PeerMsg`s **without any connection between them** — no
@@ -41,9 +41,9 @@ msbuild "LocalInMemoryTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 x64\Debug\LocalInMemoryTest.exe
 ```
 
-The solution references the sibling `Msgcore` and `TargetCore` projects and
+The solution references the sibling `Msgcore` and `Targetcore` projects and
 links their `.lib`s from `..\..\..\lib`; the post-build step copies the
-`Msgcore` DLLs next to the exe. `TargetCore.dll` must be reachable at
+`Msgcore` DLLs next to the exe. `Targetcore.dll` must be reachable at
 run time (it lives in `%WDMSCS_DEBUG%`).
 
 ## Verdict (process exit code)

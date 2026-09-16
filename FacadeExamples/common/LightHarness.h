@@ -22,7 +22,7 @@
 // DirectExamples each carried, per file:
 //
 //   * a stdafx.h pulling in afx.h/afxwin.h/afxext.h/afxmt.h/afxtempl.h,
-//     WinSock2.h, mswsock.h and the TargetCore headers;
+//     WinSock2.h, mswsock.h and the Targetcore headers;
 //   * `CWinApp theApp;` -- MFC's one-instance-per-exe rule;
 //   * a _CrtSetReportHook assert trap, because a debug ASSERT inside the
 //     kernel would otherwise pop a MODAL DIALOG and hang a headless run;

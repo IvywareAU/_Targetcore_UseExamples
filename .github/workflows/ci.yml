@@ -19,7 +19,7 @@
 # READ THIS BEFORE TRUSTING A GREEN TICK FROM THIS WORKFLOW.
 #
 # The five trees here are examples OF libraries that are not published alongside
-# them. `..\..\..\Msgcore`, `..\..\..\TargetCore`, `..\..\..\TargetFacade`,
+# them. `..\..\..\Msgcore`, `..\..\..\Targetcore`, `..\..\..\TargetFacade`,
 # `..\..\..\lib`, `..\..\..\bin` and `..\..\..\vsutils` are peer directories of a
 # parent solution this repository is checked out inside; they are not submodules
 # and not vendored. README.md "The sibling dependencies" documents every binding,

@@ -38,7 +38,7 @@
 //   different route -- and pays one login handshake for it.
 //
 //   If you specifically need pump injection, that is a reason to use
-//   TargetCore directly; see DirectExamples\LocalInMemoryTest.
+//   Targetcore directly; see DirectExamples\LocalInMemoryTest.
 //
 // Note also what disappears: because every send below happens on a hub's own
 // callback thread or on main, and the facade routes rather than injects, the

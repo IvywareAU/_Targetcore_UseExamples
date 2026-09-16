@@ -57,7 +57,7 @@ Write-Host "javac  : $javac ($verLine.Trim())"
 #
 # All three go into bin\<Config> together, and TargetFacade.dll is loaded from
 # there by full path. Windows searches a loaded module's OWN directory for its
-# dependencies, so staging the set side by side is what makes TargetCore.dll and
+# dependencies, so staging the set side by side is what makes Targetcore.dll and
 # Msgcore.dll resolve without touching PATH.
 $src = Join-Path $here "..\..\TargetFacade\out\x64\$Config"
 $bin = Join-Path $here "bin\$Config"
@@ -67,12 +67,12 @@ if (-not (Test-Path $src)) {
 }
 New-Item -ItemType Directory -Force -Path $bin | Out-Null
 
-foreach ($dll in @('TargetFacade.dll','TargetCore.dll','Msgcore.dll')) {
+foreach ($dll in @('TargetFacade.dll','Targetcore.dll','Msgcore.dll')) {
     $from = Join-Path $src $dll
     if (-not (Test-Path $from)) { throw "missing $dll in $src" }
     Copy-Item $from $bin -Force
 }
-Write-Host "staged : $bin  (TargetFacade.dll, TargetCore.dll, Msgcore.dll)"
+Write-Host "staged : $bin  (TargetFacade.dll, Targetcore.dll, Msgcore.dll)"
 
 # ---- compile ---------------------------------------------------------------
 $out = Join-Path $here "out\$Config"

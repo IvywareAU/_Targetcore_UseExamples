@@ -1,7 +1,7 @@
 # FacadeExamples
 
 Every harness in [`DirectExamples`](../DirectExamples), rewritten on top of
-**[TargetFacade](../../TargetFacade)** instead of TargetCore directly.
+**[TargetFacade](../../TargetFacade)** instead of Targetcore directly.
 
 Same questions, same verdicts, same exit-code contract — so the two trees can be
 read side by side. What changes is how much you have to know to ask the question.
@@ -72,13 +72,13 @@ needs to know which branch a source is reachable through, which is routing state
 this gate does not have. Tightening it is the PSK / route-attestation work, not a
 predicate change. See `SECURITY.md`.
 
-## Note on TargetCore's flat C API
+## Note on Targetcore's flat C API
 
-The numbers above were taken after `TargetCore_c.{h,cpp,_u8.cpp}` — the flat
-`extern "C"` / Panama surface — was removed from `TargetCore.dll` on 2026-08-13.
+The numbers above were taken after `Targetcore_c.{h,cpp,_u8.cpp}` — the flat
+`extern "C"` / Panama surface — was removed from `Targetcore.dll` on 2026-08-13.
 Nothing here used it: `dumpbin /imports` shows `TargetFacade.dll` importing
 **zero** of its 74 symbols, and removing it changed no result in this tree. The
-sources are preserved in `MSCS_JavaBindings\TargetCore\native\`.
+sources are preserved in `MSCS_JavaBindings\Targetcore\native\`.
 
 ## Migrated to TargetFacade ABI 4
 
@@ -141,7 +141,7 @@ The facade's model is that hubs talk over connections, so there is no
 `GetHubID()` and no raw pump queue. The Light version reaches the same end state
 (two in-process hubs, messages both ways, nothing leaves the address space) over
 the Dmx transport, and pays one login handshake for it. **If you need pump
-injection, that is a reason to use TargetCore directly.**
+injection, that is a reason to use Targetcore directly.**
 
 **`PipeMsgFactoryTest`** existed to show that `RedirectFactory` produces
 something that routes like a hand-built `P2PeerMsg32`, and carried a long
@@ -162,7 +162,7 @@ you are working the Linux port, use the original.
 **`RouteLoopbackTest`** is the odd one out in the *original* tree: it drives
 treehub_runtime's `PeerNetwork::route()`, the clean-room in-process router the
 code generator targets — no `P2PeerHub`, no `PostP2Pmsg`, no pump thread. There
-is no TargetCore in it to put a facade over. So the Light version asks the
+is no Targetcore in it to put a facade over. So the Light version asks the
 original's *question* of the real kernel instead: build the same four-node tree
 out of facade hubs and see how MSCS routes it. It does, and the answers are
 worth having — see below.
@@ -185,7 +185,7 @@ real four-hub mesh rather than three against an in-process function call.
 What actually disappeared, in every single file:
 
 * `CWinApp theApp;` and a `stdafx.h` pulling in `afx.h`, `afxwin.h`, `afxext.h`,
-  `afxmt.h`, `afxtempl.h`, `WinSock2.h`, `mswsock.h` and four TargetCore headers
+  `afxmt.h`, `afxtempl.h`, `WinSock2.h`, `mswsock.h` and four Targetcore headers
 * the `_CrtSetReportHook` assert trap every harness needed, because a debug
   ASSERT inside the kernel pops a **modal dialog** and hangs a headless run
 * `StartupP2Pmsg` / `WSAStartup` / `SpawnHub` / `CloseHub` / `WaitForSingleObject`

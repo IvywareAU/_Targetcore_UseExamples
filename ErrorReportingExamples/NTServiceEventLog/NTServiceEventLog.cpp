@@ -34,14 +34,14 @@
 
 #include "P2Pwin32.h"
 #include "NTServiceEventLog.h"
-#include "TargetCoreEvt.h"             // TargetCore's committed message catalogue
+#include "TargetcoreEvt.h"             // Targetcore's committed message catalogue
 
 #include <cstdio>
 
 ///////////////////////////////////////////////////////////////////////
 //  SCM entry points
 //  NOTES: The SCM calls plain functions, so a service object needs a pair of
-//         statics and a global to delegate through. TargetCore has its own
+//         statics and a global to delegate through. Targetcore has its own
 //         internal pair for the same purpose; they are not exported, and an
 //         example is clearer for owning them anyway - this is the whole of the
 //         "how does the SCM reach my object" question.
@@ -182,9 +182,9 @@ AppEventLog::Report ( P2Pevent_e eClass, LPCWSTR lpszOrigin
 
 //
 //  Names the module carrying the message table this source will be rendered with
-//  NOTES: TargetCore.dll, which is staged beside this executable by the build.
+//  NOTES: Targetcore.dll, which is staged beside this executable by the build.
 //         Derived from the EXE's own directory rather than from a loaded module
-//         handle, because at install time TargetCore is delay-loaded and may not
+//         handle, because at install time Targetcore is delay-loaded and may not
 //         be in the process yet.
 //       : If you give your own module its own .mc catalogue, name that module
 //         here instead. Nothing else in this file changes.
@@ -207,7 +207,7 @@ AppEventLog::MessageFilePath ( CStringW& strPath )
     if ( iSlash < 0 )
       return false;
 
-    strPath = strExe.Left ( iSlash + 1 ) + L"TargetCore.dll";
+    strPath = strExe.Left ( iSlash + 1 ) + L"Targetcore.dll";
     return true;
 }
 
@@ -336,7 +336,7 @@ ReportingHub::On_P2PeerBCast ( P2PeerMsg *pMsg )
 //
 //  Error handler - pump thread
 //  NOTES: An APPLICATION error, reported as one. This is the case a library
-//         cannot cover for you: TargetCore knows an error message arrived, and
+//         cannot cover for you: Targetcore knows an error message arrived, and
 //         only your code knows whether that is worth an operator's attention.
 //
 msgRESULT
@@ -357,9 +357,9 @@ ReportingService::ReportingService ( )
                                 , &ExampleServiceMain
                                 , &ExampleControlHandler )
 {
-    SetDisplayName ( _T("TargetCore event log example") );
+    SetDisplayName ( _T("Targetcore event log example") );
     SetServiceDesc ( _T("Hosts a P2PeerHub and reports to the Windows event "
-                        "log. An example from _TargetCore_UseExamples.") );
+                        "log. An example from _Targetcore_UseExamples.") );
 }
 
 ReportingService::~ReportingService ( )

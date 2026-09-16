@@ -71,7 +71,7 @@ public final class Network implements AutoCloseable {
      * {@code TargetFacade.dll} beside the running classes, then the sibling
      * {@code TargetFacade\out\x64\<Config>} the other trees stage from. Loading
      * by full path also settles where its own dependencies come from
-     * ({@code TargetCore.dll}, {@code Msgcore.dll} and MFC): Windows searches
+     * ({@code Targetcore.dll}, {@code Msgcore.dll} and MFC): Windows searches
      * the loaded module's own directory for them, which is why the build stages
      * all three side by side rather than relying on {@code PATH}.
      */

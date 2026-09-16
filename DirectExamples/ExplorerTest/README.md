@@ -1,6 +1,6 @@
 # ExplorerTest
 
-The **hub Explorer** — TargetCore's directory service — asked what a hub is,
+The **hub Explorer** — Targetcore's directory service — asked what a hub is,
 three times, by a client that was given its identity rather than choosing one.
 
 Two `P2PeerHub`s in one process over loopback TCP, exactly like
@@ -118,7 +118,7 @@ is untested ground; an example is the wrong place to find out.
 
 **It does not subclass `P2PeerExplorer`.** The server runs a stock one.
 Overriding is for an application that wants to watch the registry or raise its
-own notifications — and nothing in TargetCore raises a hub-status *broadcast*
+own notifications — and nothing in Targetcore raises a hub-status *broadcast*
 on its own (`m_dwExpumpMask` is written at `P2Pwin32.cpp:1137` and read
 nowhere), so the only way to see the broadcast half of `On_P2PmsgExp_Hub` is to
 call `QueryP2PmsgExp_Hub(L"", …)` from inside the expump thread.
@@ -130,15 +130,15 @@ the only thread that mutates it.
 
 ## Prerequisites
 
-`Msgcore.dll` and `TargetCore.dll` must be **current** in `..\..\..\bin\<Config>64`
+`Msgcore.dll` and `Targetcore.dll` must be **current** in `..\..\..\bin\<Config>64`
 before this links, and the Explorer is the sharpest possible way to discover
 they are not: `P2PeerExpump_ACTIVATE` grew a second parameter in `de4fb9a`, so
 an import library built before that commit fails to resolve it. The post-build
-step stages both DLLs and fails loudly if `TargetCore.dll` is missing, because
+step stages both DLLs and fails loudly if `Targetcore.dll` is missing, because
 it is delay-loaded and the alternative is `0xC06D007E` at startup.
 
 ```
-msbuild "..\..\..\TargetCore\TargetCore(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
+msbuild "..\..\..\Targetcore\Targetcore(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
 ```
 
 ## Relation to the other harnesses

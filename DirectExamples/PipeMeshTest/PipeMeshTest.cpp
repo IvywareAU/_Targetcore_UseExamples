@@ -15,11 +15,11 @@
 //
 // PipeMeshTest.cpp
 //
-// SINGLE-PROCESS, TWO-HUB named-pipe connectivity probe for TargetCore.
+// SINGLE-PROCESS, TWO-HUB named-pipe connectivity probe for Targetcore.
 //
 // Question this harness answers:
 //   Can two P2PeerHub's living in ONE process connect to each other over a
-//   Windows NAMED PIPE (P2PeerConPipe) and complete the TargetCore login
+//   Windows NAMED PIPE (P2PeerConPipe) and complete the Targetcore login
 //   handshake -- OR does it trip the same failure the loopback-TCP path did
 //   (ASSERT(pCon==nullptr) at P2Pwin32.cpp:3844, no On_ConLoginAck)?
 //

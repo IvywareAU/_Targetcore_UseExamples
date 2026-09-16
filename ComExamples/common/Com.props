@@ -19,7 +19,7 @@
   Com.props : every setting all eleven COM harnesses share.
 
   Note what is NOT here. A COM client links NO project library at all: not
-  TargetFacade.lib, not TargetCore.lib, nothing. It binds to the type library's
+  TargetFacade.lib, not Targetcore.lib, nothing. It binds to the type library's
   interfaces at compile time and to the registered coclass at run time, so the
   only inputs are ole32/oleaut32/uuid and the MIDL output header.
 
@@ -84,7 +84,7 @@
     <PostBuildEvent>
       <Command>xcopy /Y /D "$(FacadeRoot)out\$(Platform)\$(Configuration)\TargetCom.dll" "$(OutDir)"
 xcopy /Y /D "$(FacadeRoot)out\$(Platform)\$(Configuration)\TargetFacade.dll" "$(OutDir)"
-xcopy /Y /D "$(ComCoreDir)TargetCore.dll" "$(OutDir)"
+xcopy /Y /D "$(ComCoreDir)Targetcore.dll" "$(OutDir)"
 xcopy /Y /D "$(ComCoreDir)Msgcore.dll" "$(OutDir)"</Command>
       <Message>staging COM server + facade + kernel DLLs</Message>
     </PostBuildEvent>

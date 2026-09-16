@@ -15,7 +15,7 @@
 //
 // ExplorerTest.cpp
 //
-// SINGLE-PROCESS, TWO-HUB example of the TargetCore HUB EXPLORER -- the
+// SINGLE-PROCESS, TWO-HUB example of the Targetcore HUB EXPLORER -- the
 // directory service that lets a peer ask a hub what it is and be told when
 // that changes.
 //
@@ -339,7 +339,7 @@ int main(int argc, char* argv[])
 
     const short nPort = (argc >= 2) ? (short)atoi(argv[1]) : kDefaultPort;
 
-    wprintf(L"=== ExplorerTest - the TargetCore hub Explorer, end to end ===\n");
+    wprintf(L"=== ExplorerTest - the Targetcore hub Explorer, end to end ===\n");
     wprintf(L"Hub  : %s   slots: %s\n", kHubAddr, kExpDomain);
     wprintf(L"Port : %d (127.0.0.1)\n\n", (int)nPort);
     fflush(stdout);

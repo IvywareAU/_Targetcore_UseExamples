@@ -13,7 +13,7 @@ Is it possible to use two connections with one hub?
 ## Answer: **YES** — with one rule
 
 A `P2PeerHub` owns a *list* of connections (`EnumP2PmsgCon`), so it is built to supervise many at
-once. The single constraint, enforced in `P2PeerHub::PostP2PeerCon` (`TargetCore/P2PeerHub.cpp:432-447`):
+once. The single constraint, enforced in `P2PeerHub::PostP2PeerCon` (`Targetcore/P2PeerHub.cpp:432-447`):
 
 > a connection is rejected (`PostP2PeerCon` returns `FALSE`) if its identification address —
 > `P2PeerCon::GetP2Paddress()`, i.e. `m_oThatP2Paddr`, the **remote-peer address** — duplicates one
@@ -57,16 +57,16 @@ VERDICT: PASS
 
 ## Build & run
 
-The project references the sibling `Msgcore` and `TargetCore` projects (`..\..\lib` for import libs,
-`..\..\Msgcore` / `..\..\TargetCore` for headers), mirroring `AlexTest`.
+The project references the sibling `Msgcore` and `Targetcore` projects (`..\..\lib` for import libs,
+`..\..\Msgcore` / `..\..\Targetcore` for headers), mirroring `AlexTest`.
 
 ```
 msbuild "TwoConTest(2026).vcxproj" /p:Configuration=Debug /p:Platform=x64
-# run: x64\Debug\TwoConTest.exe   (needs TargetCore.dll + Msgcore.dll beside it)
+# run: x64\Debug\TwoConTest.exe   (needs Targetcore.dll + Msgcore.dll beside it)
 ```
 
-> Runtime note: `TargetCore.dll` is delay-loaded. The post-build step copies it from
-> `..\..\TargetCore\x64\Debug\`; if you build `TargetCore` only to `..\..\bin\Debug64\`, copy the DLL
+> Runtime note: `Targetcore.dll` is delay-loaded. The post-build step copies it from
+> `..\..\Targetcore\x64\Debug\`; if you build `Targetcore` only to `..\..\bin\Debug64\`, copy the DLL
 > next to `TwoConTest.exe` manually (as this run did).
 
 ## License

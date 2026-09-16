@@ -20,7 +20,7 @@
 // The chain this harness completes is the reason the whole stack exists, and
 // this tree is its last link:
 //
-//   TargetCore   BEGIN_P2PeerMsg_MAP / ON_P2PeerMsg / END_P2PeerMsg_MAP
+//   Targetcore   BEGIN_P2PeerMsg_MAP / ON_P2PeerMsg / END_P2PeerMsg_MAP
 //                on a P2PeerHub subclass, plus DECLARE_P2PeerMsg_MAP
 //   facade       hub.onTopic(name, lambda)          -- no macros, no subclass
 //   COM          one _IP2PHubEvents.OnMessage event carrying (source, topic,

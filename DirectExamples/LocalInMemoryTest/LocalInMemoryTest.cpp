@@ -15,7 +15,7 @@
 //
 // LocalInMemoryTest.cpp
 //
-// SINGLE-PROCESS, TWO-HUB *in-memory* delivery example for TargetCore.
+// SINGLE-PROCESS, TWO-HUB *in-memory* delivery example for Targetcore.
 //
 // What this demonstrates
 // ----------------------
@@ -165,7 +165,7 @@ private:
 // pump queue. dst == the target hub's own address, so its pump dispatches
 // it as On_P2PeerBCast.
 // -------------------------------------------------------------------------
-static void PostInMemoryBCast(P2PeerHub&  oTargetCore,
+static void PostInMemoryBCast(P2PeerHub&  oTargetcore,
                               P2PaddrSTR  strSrc,
                               P2PaddrSTR  strDst,
                               LPCWSTR     lpszText)
@@ -175,7 +175,7 @@ static void PostInMemoryBCast(P2PeerHub&  oTargetCore,
                                           lpszText, nBytes);
 
     // Deliver into the target hub's pump. GetHubID() returns the pump id.
-    PostP2Pmsg(pMsg, oTargetCore.GetHubID());
+    PostP2Pmsg(pMsg, oTargetcore.GetHubID());
 
     wprintf(L"[MAIN] PostP2Pmsg -> '%s' : \"%s\"\n", strDst, lpszText);
     fflush(stdout);

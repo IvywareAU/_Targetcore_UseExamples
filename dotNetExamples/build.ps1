@@ -116,7 +116,7 @@ $core   = if ($Config -eq 'Debug') { Join-Path $here '..\..\bin\Debug64' } else 
 $stage = @(
     (Join-Path $facade "out\x64\$Config\TargetCom.dll")
     (Join-Path $facade "out\x64\$Config\TargetFacade.dll")
-    (Join-Path $core   "TargetCore.dll")
+    (Join-Path $core   "Targetcore.dll")
     (Join-Path $core   "Msgcore.dll")
 )
 

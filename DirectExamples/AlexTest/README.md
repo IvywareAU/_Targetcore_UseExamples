@@ -1,6 +1,6 @@
 # AlexTest — P2P Messaging Demo
 
-A minimal Visual Studio 2026 console application that demonstrates peer-to-peer TCP/IP messaging using the **TargetCore** kernel library.
+A minimal Visual Studio 2026 console application that demonstrates peer-to-peer TCP/IP messaging using the **Targetcore** kernel library.
 
 ---
 
@@ -38,18 +38,18 @@ are needed.
 
 Where the post-build step picks up each kernel DLL:
 
-| Configuration | `Msgcore` | `TargetCore` |
+| Configuration | `Msgcore` | `Targetcore` |
 |---|---|---|
 | Debug | `..\..\..\Msgcore\x64\Debug\` | `$(WDMSCS_DEBUG)` |
-| Release | `..\..\..\Msgcore\x64\Release\` | `..\..\..\TargetCore\x64\Release\` |
+| Release | `..\..\..\Msgcore\x64\Release\` | `..\..\..\Targetcore\x64\Release\` |
 
-**Build `Msgcore` and `TargetCore` first.** If the `TargetCore` DLL is missing the
+**Build `Msgcore` and `Targetcore` first.** If the `Targetcore` DLL is missing the
 post-build step fails the build, rather than producing an exe that dies at startup
 with `0xC06D007E` (delay-load: module not found).
 
 The project links against (from `..\..\..\lib\$(Platform)`):
 - `Msgcore.lib` — P2P message data model
-- `TargetCore.lib` — P2P networking kernel (TCP/IP transport)
+- `Targetcore.lib` — P2P networking kernel (TCP/IP transport)
 
 ---
 
@@ -126,7 +126,7 @@ AlexTest.exe
     ├── Msgcore.dll        P2P message data model
     │     P3PmsgField, P3PmsgList, P2PmsgMgr ...
     │
-    └── TargetCore.dll     P2P networking kernel
+    └── Targetcore.dll     P2P networking kernel
           P2PeerHub, P2PeerConWsa, P2PeerMsg ...
 ```
 
@@ -134,9 +134,9 @@ AlexTest.exe
 
 | Class | From | Role |
 |---|---|---|
-| `P2PeerHub` | TargetCore | Message router. Owns the IOCP pump thread and all connections. |
-| `P2PeerConWsa` | TargetCore | Single TCP/IP connection (WSA + IOCP). |
-| `P2PeerMsg` | TargetCore | Typed, self-describing message packet exchanged between hubs. |
+| `P2PeerHub` | Targetcore | Message router. Owns the IOCP pump thread and all connections. |
+| `P2PeerConWsa` | Targetcore | Single TCP/IP connection (WSA + IOCP). |
+| `P2PeerMsg` | Targetcore | Typed, self-describing message packet exchanged between hubs. |
 | `AlexTestHub` | AlexTest | Our subclass of `P2PeerHub`. Overrides virtual handlers. |
 
 ### Addressing
@@ -194,9 +194,9 @@ virtual conRESULT On_ConLoginAck(P2PeerCon*, P2PaddrSTR, P2PaddrSTR,
 
 ### MFC Extension DLL Note
 
-`TargetCore.dll` is an **MFC Extension DLL**. Its `DllMain` calls `AfxInitExtensionModule` / `new CDynLinkLibrary(...)`, which requires MFC's thread state (`AfxGetThread()`) to be valid. That state is set up by the `CWinApp theApp` global — which is constructed *after* implicit DLLs would normally load.
+`Targetcore.dll` is an **MFC Extension DLL**. Its `DllMain` calls `AfxInitExtensionModule` / `new CDynLinkLibrary(...)`, which requires MFC's thread state (`AfxGetThread()`) to be valid. That state is set up by the `CWinApp theApp` global — which is constructed *after* implicit DLLs would normally load.
 
-To avoid the timing conflict, the project links `TargetCore` with `/DELAYLOAD`, so the DLL is loaded on the first actual API call (inside `main()`, after `CWinApp` is fully constructed).
+To avoid the timing conflict, the project links `Targetcore` with `/DELAYLOAD`, so the DLL is loaded on the first actual API call (inside `main()`, after `CWinApp` is fully constructed).
 
 ---
 

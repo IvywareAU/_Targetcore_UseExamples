@@ -15,7 +15,7 @@
 //
 // AlexTest.cpp
 //
-// Simple P2P messaging console app using TargetCore TCP/IP transport.
+// Simple P2P messaging console app using Targetcore TCP/IP transport.
 //
 // Usage:
 //   AlexTest                          -- server/receive mode  (listens on port 7777)
@@ -44,7 +44,7 @@ CWinApp theApp;
 
 // Delay-load failure diagnostics come from vsutils\DelayLoadReport.cpp, which
 // is compiled into this .exe (see the .vcxproj).  Without it, a missing or
-// stale TargetCore DLL kills the process silently -- see that file's header.
+// stale Targetcore DLL kills the process silently -- see that file's header.
 
 // -------------------------------------------------------------------------
 // Network configuration
@@ -111,7 +111,7 @@ protected:
 
     // ------------------------------------------------------------------
     // Connection login-acknowledged handler (client side).
-    // The TCP+TargetCore handshake is complete; safe to post messages now.
+    // The TCP+Targetcore handshake is complete; safe to post messages now.
     // ------------------------------------------------------------------
     virtual conRESULT On_ConLoginAck(P2PeerCon*   pCon,
                                       P2PaddrSTR   strThisP2Paddr,
@@ -279,7 +279,7 @@ int main(int argc, char* argv[])
     // ---- Synchronisation event ---------------------------------------------
     g_hDoneEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 
-    // ---- Initialise TargetCore ---------------------------------------------
+    // ---- Initialise Targetcore ---------------------------------------------
     if (!StartupP2Pmsg(16))
     {
         wprintf(L"FATAL: StartupP2Pmsg() failed.\n");
@@ -289,7 +289,7 @@ int main(int argc, char* argv[])
     }
 
     // ---- Initialise Winsock ------------------------------------------------
-    // TargetCore's StartupP2Pmsg() does NOT call WSAStartup (only
+    // Targetcore's StartupP2Pmsg() does NOT call WSAStartup (only
     // P2PeerService::Run() does).  Since AlexTest drives the hub directly,
     // the process must initialise Winsock itself before any socket use.
     WSADATA oWsaData;

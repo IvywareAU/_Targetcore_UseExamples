@@ -23,7 +23,7 @@
 // which bypasses the connection layer entirely. Neither the facade nor the COM
 // layer exposes that -- the model is that hubs talk over connections -- so this
 // reaches the same end state over the Dmx transport and pays one login
-// handshake for it. If you need pump injection, use TargetCore directly.
+// handshake for it. If you need pump injection, use Targetcore directly.
 //
 // The ordering rule found while writing the Light tree applies here too, and it
 // is worth restating because a managed client is furthest of all from the
