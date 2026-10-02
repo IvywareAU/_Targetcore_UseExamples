@@ -249,6 +249,32 @@ keypress **only when stdin is a real console** (`GetConsoleMode` succeeds). It
 still stops on Enter when you run it by hand, and `run_all.ps1` can now drive
 both processes.
 
+## Beyond the originals: `FieldViewTest`
+
+The one harness here with no original, because it exercises new surface: typed
+named fields through `TargetFacadeFn.hpp` — `out[L"x"] = v` and `P2PF_FIELD`
+views (`MsgFieldAccessPlan.md`, F4). Part A writes every type into an
+`OutMessage` and reads it straight back, together with the error contract:
+a reserved name is `P2PF_E_RESERVED_TOPIC`, an absent field `P2PF_E_NO_FIELD`,
+and a read of the wrong size `E_INVALIDARG`. Part B sends the message over an
+in-process Dmx link. The receiver reads it through the **same view type**,
+confirms that a write through a received message is refused (`E_ACCESSDENIED`),
+and answers with fields of its own. Measured 2026-10-02: 26/26 checks, both
+legs delivered, v143 and v145 Debug.
+
+**It exposed the Dmx teardown crash, now fixed.** With `DmxMeshTest` and
+`RouteLoopbackTest`, this harness used to exit `0xC0000005` *after* printing
+`Done (exit=0)` (`DmxMeshTest` did so 3 runs in 6, with or without the field
+layer). It was a double free in Targetcore. `P2PeerConDmx::OnClose()` and
+`Close()` dropped the *peer* connection from this hub's pump thread, racing the
+peer's own pump over the peer's receive OVERLAPPED, and both freed it. Fixed
+2026-10-02 in `P2PeerConDmx.cpp` (`P2PeerConDmx_BREAK_PAIR`): the peer is now
+told on its own pump, the way `Drop()` already told it. Afterwards: 60/60 clean
+exits across the four Dmx harnesses, and `run_all.ps1` 14/14. A side effect you
+will see is one "Receive failure / Connection dropped out (995)" event per Dmx
+teardown on stderr. That is the peer learning, on its own thread, that its
+partner left.
+
 ## Layout
 
 ```
@@ -260,7 +286,7 @@ bin\<Config>\             all exes plus the three staged DLLs
 run_all.ps1               build + run + summarise
 ```
 
-All eleven build into one output directory, so the facade and kernel DLLs are
+All twelve build into one output directory, so the facade and kernel DLLs are
 staged once and every harness finds them.
 
 ## License

@@ -59,7 +59,7 @@ New-Item -ItemType Directory -Force -Path $logs | Out-Null
 $single = @(
     'WsaMeshTestLight', 'PipeMeshTestLight', 'DmxMeshTestLight', 'Com232MeshTestLight',
     'LocalInMemoryTestLight', 'PipeMsgMapTestLight', 'PipeMsgFactoryTestLight',
-    'TwoConTestLight', 'RouteLoopbackTestLight'
+    'TwoConTestLight', 'RouteLoopbackTestLight', 'FieldViewTestLight'
 )
 
 $results = [System.Collections.ArrayList]::new()

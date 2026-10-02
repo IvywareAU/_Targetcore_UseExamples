@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RouteLoopbackTestLight", "R
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TwoConTestLight", "TwoConTest\TwoConTestLight(2022).vcxproj", "{090AD7DD-C7B3-4814-946F-1AE92146E6F5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FieldViewTestLight", "FieldViewTest\FieldViewTestLight(2022).vcxproj", "{6C3E5F2A-9B41-4D7E-A8C2-3F1D7E9B5A64}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WsaMeshTestLight", "WsaMeshTest\WsaMeshTestLight(2022).vcxproj", "{48336D62-2122-4677-95DE-3910B9E1218C}"
 EndProject
 Global
@@ -73,6 +75,10 @@ Global
 		{090AD7DD-C7B3-4814-946F-1AE92146E6F5}.Debug|x64.Build.0 = Debug|x64
 		{090AD7DD-C7B3-4814-946F-1AE92146E6F5}.Release|x64.ActiveCfg = Release|x64
 		{090AD7DD-C7B3-4814-946F-1AE92146E6F5}.Release|x64.Build.0 = Release|x64
+		{6C3E5F2A-9B41-4D7E-A8C2-3F1D7E9B5A64}.Debug|x64.ActiveCfg = Debug|x64
+		{6C3E5F2A-9B41-4D7E-A8C2-3F1D7E9B5A64}.Debug|x64.Build.0 = Debug|x64
+		{6C3E5F2A-9B41-4D7E-A8C2-3F1D7E9B5A64}.Release|x64.ActiveCfg = Release|x64
+		{6C3E5F2A-9B41-4D7E-A8C2-3F1D7E9B5A64}.Release|x64.Build.0 = Release|x64
 		{48336D62-2122-4677-95DE-3910B9E1218C}.Debug|x64.ActiveCfg = Debug|x64
 		{48336D62-2122-4677-95DE-3910B9E1218C}.Debug|x64.Build.0 = Debug|x64
 		{48336D62-2122-4677-95DE-3910B9E1218C}.Release|x64.ActiveCfg = Release|x64
