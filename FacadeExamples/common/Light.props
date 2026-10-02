@@ -75,12 +75,25 @@
       <AdditionalDependencies>TargetFacade.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(FacadeRoot)out\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /Y /D "$(FacadeRoot)out\$(Platform)\$(Configuration)\TargetFacade.dll" "$(OutDir)"
-xcopy /Y /D "$(LightCoreDir)Targetcore.dll" "$(OutDir)"
-xcopy /Y /D "$(LightCoreDir)Msgcore.dll" "$(OutDir)"</Command>
-      <Message>staging facade + kernel DLLs</Message>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
+
+  <!-- Stage the facade + kernel DLLs beside the exes.
+       Was three xcopy lines in a PostBuildEvent.  Every harness stages the SAME
+       three files into the SAME OutDir, so under msbuild -m (run_all.ps1) two
+       projects' xcopys collided on one destination and the loser failed the
+       build with a sharing violation.  The Copy task retries that instead, and
+       a missing source - bin\Release64 never built - is named rather than
+       reported as xcopy's "File not found". -->
+  <Target Name="StageLightRuntime" AfterTargets="Build">
+    <ItemGroup>
+      <LightRuntime Include="$(FacadeRoot)out\$(Platform)\$(Configuration)\TargetFacade.dll" />
+      <LightRuntime Include="$(LightCoreDir)Targetcore.dll" />
+      <LightRuntime Include="$(LightCoreDir)Msgcore.dll" />
+    </ItemGroup>
+    <Error Condition="!Exists('%(LightRuntime.FullPath)')"
+           Text="%(LightRuntime.FullPath) is missing: build $(Configuration)|$(Platform) of Msgcore, Targetcore and TargetFacade first" />
+    <Copy SourceFiles="@(LightRuntime)" DestinationFolder="$(OutDir)"
+          SkipUnchangedFiles="true" Retries="10" RetryDelayMilliseconds="250" />
+  </Target>
 
 </Project>
