@@ -54,6 +54,8 @@ struct Telemetry : p2pf::FieldView
     P2PF_FIELD ( ratio,   double );
     P2PF_FIELD ( online,  bool );
     P2PF_FIELD ( samples, p2pf::Blob );
+    P2PF_FIELD ( channel, short );            // 2 bytes on the wire
+    P2PF_FIELD ( stamp,   p2pf::Time );       // seconds since 1970, 8 bytes
 };
 
 struct Ack : p2pf::FieldView
@@ -90,6 +92,8 @@ static void Fill ( p2pf::OutMessage& out )
     t->ratio   = 0.75;
     t->online  = true;
     t->samples = p2pf::Blob ( kRaw, sizeof kRaw );
+    t->channel = (short)-3;                            // a short field takes a short
+    t->stamp   = p2pf::Time ( 1700000000LL );          // explicit: a long long stays an int
     out[L"note"] = "UTF-8 \xE2\x82\xAC";                // the dynamic form, narrow
 }
 
@@ -104,6 +108,12 @@ static void Verify ( const p2pf::ViewOf<Telemetry>& t, LPCWSTR role )
     Check ( t->ratio.get() == 0.75,                   role, L"ratio    (double)" );
     Check ( t->online.get(),                          role, L"online   (bool)" );
     Check ( t->samples.get() == p2pf::Blob ( kRaw, sizeof kRaw ), role, L"samples  (blob)" );
+    Check ( t->channel.get() == -3,                   role, L"channel  (short)" );
+    Check ( t->stamp.get() == p2pf::Time ( 1700000000LL ), role, L"stamp    (time)" );
+    Check ( t[L"stamp"].asInt64() == 1700000000LL,    role, L"stamp    (a time is 8 bytes: asInt64 reads it too)" );
+    Check ( t[L"channel"].asShort() == -3 &&
+            ErrorOf ( [&]{ (void)t[L"channel"].asInt(); } ) != S_OK,
+                                                      role, L"channel  (2 bytes is not an int)" );
     Check ( t[L"note"].asText() == L"UTF-8 \x20AC",   role, L"note     (UTF-8 in, UTF-16 out)" );
 }
 
@@ -129,7 +139,7 @@ int main ( )
             p2pf::ViewOf<Telemetry> t ( out );
             Verify ( t, L"LOCAL" );
         }
-        Check ( out.count() == 7, L"LOCAL", L"seven fields set" );
+        Check ( out.count() == 9, L"LOCAL", L"nine fields set" );
         // What a plain flat-ABI reader sees: SetFieldText's shape for text.
         {
             unsigned int cb = 0;
@@ -181,7 +191,7 @@ int main ( )
         hubB.onTopic ( L"ack", [&] ( const p2pf::Message& m )
         {
             p2pf::ViewOf<Ack> a ( m );
-            Check ( a->seen.get() == 7,               L"HubB", L"HubA saw seven fields" );
+            Check ( a->seen.get() == 9,               L"HubB", L"HubA saw nine fields" );
             Check ( a->echoed.get() == L"sensor-04",  L"HubB", L"HubA echoed the device" );
             gAtB.open();
         });

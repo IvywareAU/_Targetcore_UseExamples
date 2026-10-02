@@ -259,7 +259,8 @@ a reserved name is `P2PF_E_RESERVED_TOPIC`, an absent field `P2PF_E_NO_FIELD`,
 and a read of the wrong size `E_INVALIDARG`. Part B sends the message over an
 in-process Dmx link. The receiver reads it through the **same view type**,
 confirms that a write through a received message is refused (`E_ACCESSDENIED`),
-and answers with fields of its own. Measured 2026-10-02: 26/26 checks, both
+and answers with fields of its own, including a `short` and a `p2pf::Time`.
+Measured 2026-10-03: 34/34 checks, both
 legs delivered, v143 and v145 Debug.
 
 **It exposed the Dmx teardown crash, now fixed.** With `DmxMeshTest` and
