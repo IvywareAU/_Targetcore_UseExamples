@@ -170,7 +170,8 @@ namespace Com
     {
         /// <summary>A listen must NOT name a host: the kernel binds INADDR_ANY regardless.</summary>
         public static string TcpListen (ushort port)              { return "tcp://:" + port; }
-        public static string TcpDial   (string host, ushort port) { return "tcp://" + host + ":" + port; }
+        // An IPv6 literal is bracketed so its last group is not read as the port.
+        public static string TcpDial   (string host, ushort port) { return "tcp://" + (host.IndexOf(':') >= 0 && !host.StartsWith("[") ? "[" + host + "]" : host) + ":" + port; }
         public static string Pipe      (string pipeName)          { return "pipe://" + pipeName; }
         public static string Dmx       (string serviceName)       { return "dmx://" + serviceName; }
         public static string Serial    (int comPort)              { return "serial://COM" + comPort; }

@@ -66,7 +66,7 @@ static class AlexInterop
     // range-check its LONG parameter by hand for exactly this reason; the
     // endpoint grammar now does it for every transport at once.
     static string TcpListenArg (int port)             { return "tcp://:" + port; }
-    static string TcpDialArg (string host, int port)  { return "tcp://" + host + ":" + port; }
+    static string TcpDialArg (string host, int port)  { return "tcp://" + (host.IndexOf(':') >= 0 && !host.StartsWith("[") ? "[" + host + "]" : host) + ":" + port; }
 
     [STAThread]
     static int Main (string[] args)

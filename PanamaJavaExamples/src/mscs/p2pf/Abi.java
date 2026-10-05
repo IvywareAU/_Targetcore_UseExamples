@@ -270,7 +270,11 @@ public final class Abi {
 
     /** A listen must NOT name a host: the kernel binds INADDR_ANY regardless. */
     public static String tcpListen(int port)             { return "tcp://:" + port; }
-    public static String tcpDial(String host, int port)  { return "tcp://" + host + ":" + port; }
+    /** An IPv6 literal is bracketed so its last group is not read as the port. */
+    public static String tcpDial(String host, int port)  {
+        String h = host.indexOf(':') >= 0 && !host.startsWith("[") ? "[" + host + "]" : host;
+        return "tcp://" + h + ":" + port;
+    }
     /** The parser takes the pipe name VERBATIM, so a full \\.\pipe\name passes through. */
     public static String pipe(String name)               { return "pipe://" + name; }
     public static String dmx(String serviceName)         { return "dmx://" + serviceName; }

@@ -149,7 +149,13 @@ inline std::wstring TcpListen ( unsigned short port )
 }
 inline std::wstring TcpDial ( LPCWSTR host, unsigned short port )
 {
-    return std::wstring ( L"tcp://" ) + host + L":" + std::to_wstring ( (unsigned)port );
+    // An IPv6 literal is bracketed, RFC3986-style, so its last group is not
+    // read as the port; the bracketed literal is also what tells the facade
+    // to dial IPv6.  A name or a dotted quad goes in as it is.
+    std::wstring h ( host );
+    if ( h.find ( L':' ) != std::wstring::npos && h[0] != L'[' )
+      h = L"[" + h + L"]";
+    return L"tcp://" + h + L":" + std::to_wstring ( (unsigned)port );
 }
 inline std::wstring Pipe ( LPCWSTR pipeName )
 {
