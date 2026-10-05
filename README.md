@@ -156,6 +156,34 @@ any other tree to compare it against.
 
 ---
 
+## Running the harnesses over IPv6
+
+Every harness here uses IPv4 loopback (`127.0.0.1`), and nothing about IPv6 is on by default. The
+switch is one string per side, because every tree except `DirectExamples` reaches TCP through
+the facade's endpoint grammar (Targetcore 3.3.0 or later):
+
+| Side | IPv4 (as shipped) | IPv6 |
+|---|---|---|
+| Listen | `TcpListen(port)` → `tcp://:PORT` | `tcp://[::]:PORT` — one socket, IPv6 **and** IPv4 |
+| Dial | `TcpDial(L"127.0.0.1", port)` | `TcpDial(L"::1", port)` → `tcp://[::1]:PORT` |
+
+- **`TcpDial` brackets an IPv6 host for you** in every tree — C++ (`light::`/`com::`), C#
+  (`Endpoint.TcpDial`, `AlexInterop`'s `TcpDialArg`) and Java (`Abi.tcpDial`) — and the bracketed
+  literal is what tells the facade to dial IPv6. Pass the bare address (`"::1"`).
+- **Change the listen first.** `TcpListen(port)` is an IPv4 listener, so an IPv6 dial at it is
+  refused. Replace it with `L"tcp://[::]:" + port` (or `tcp6://:PORT` for IPv6 only) and both
+  kinds of client can connect.
+- **Two processes:** `AlexInterop` already takes the host on its command line, so with its server
+  listening on `[::]` the dial is `AlexInterop send ::1 <port>`.
+- **`DirectExamples`** use the kernel API directly: call
+  `SetFamily(P2PeerConFamily_Dual)` on the `ServiceFactory` connection before `PostP2PeerCon`;
+  a `ClientFactory` given `L"::1"` is IPv6 on its own.
+- **Dialling a name** (not a literal) over IPv6 needs `tcp6://host:PORT` (AAAA only) or
+  `tcp46://host:PORT` (either).
+
+The full rules — canonical read-back, what is refused, allow-lists by family — are in
+TargetFacade's README and Targetcore's README, both under *Switching to IPv6*.
+
 ## Building
 
 Each tree builds independently and documents its own prerequisites. In outline:
