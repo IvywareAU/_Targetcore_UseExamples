@@ -91,9 +91,11 @@ The project reads those paths from `KgnRoot`, which has **no default**. Set the
 point at the `native` directory that holds:
 
 - **Include:** `$(KgnRoot)\treehub_runtime\include`
-- **Lib:** `$(KgnRoot)\build\x64-debug\$(Configuration)`
-  — one multi-config CMake tree, despite the `x64-debug` name, holding both
-  `Debug\` and `Release\`.
+- **Lib:** `$(KgnRoot)\out\x64\$(Configuration)`
+  — the one multi-config CMake tree `build.ps1` writes, holding both `Debug\`
+  and `Release\`. Until 2026-10-08 this read `build\x64-debug\`, a layout the
+  other repository no longer produces, so a correct `KgnRoot` still failed at
+  link time with `LNK1104`.
 
 An unset `KgnRoot` fails with a named error rather than a missing-header
 cascade. It was hardcoded to one machine's checkout until 2026-09-02, so the

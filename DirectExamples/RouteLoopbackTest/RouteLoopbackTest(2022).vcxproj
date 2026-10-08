@@ -73,7 +73,9 @@
        that this tree does not vendor. There is deliberately NO default path:
        set the KGN_ROOT environment variable, or pass /p:KgnRoot=<path> to
        msbuild. It must name the directory holding treehub_runtime\include and
-       build\x64-debug\$(Configuration).
+       out\x64\$(Configuration), which is where native\build.ps1 puts it. It read
+       build\x64-debug\$(Configuration) until 2026-10-08, a layout that repo no
+       longer produces, so pointing KgnRoot at it still failed at LNK1104.
        This was one machine's absolute checkout path until 2026-09-02, so the
        project built nowhere else and named a private repository in a file that
        ships. An unset KgnRoot now fails loudly below rather than collapsing
@@ -123,7 +125,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
       <AdditionalDependencies>treehub_runtime.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(KgnRoot)\build\x64-debug\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(KgnRoot)\out\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
 
@@ -153,7 +155,7 @@
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
       <AdditionalDependencies>treehub_runtime.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <!-- Same multi-config CMake tree as Debug; only the per-config subdir differs. -->
-      <AdditionalLibraryDirectories>$(KgnRoot)\build\x64-debug\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(KgnRoot)\out\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
 

@@ -126,8 +126,8 @@ TREES = [
             # run_all.ps1 treats a missing RouteLoopbackTest.exe as SKIP rather
             # than as a failure.
             r"$(KgnRoot)\treehub_runtime\include",
-            r"$(KgnRoot)\build\x64-debug\Debug",
-            r"$(KgnRoot)\build\x64-debug\Release",
+            r"$(KgnRoot)\out\x64\Debug",
+            r"$(KgnRoot)\out\x64\Release",
         },
     ),
     # ErrorReportingExamples is NOT one of the five bindings -- it varies the

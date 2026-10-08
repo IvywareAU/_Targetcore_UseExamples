@@ -43,6 +43,14 @@
 #                      ONLY for this one project. Any other missing exe is a real
 #                      build failure and is reported as such.
 #
+#                      It is BUILT only when KgnRoot or KGN_ROOT is set, and the
+#                      rest of the tree is built by NAMED TARGET, as
+#                      solution-build.yml does. Until 2026-10-08 this script built
+#                      the solution wholesale, and since 2026-09-02 an unset
+#                      KgnRoot fails that one project on purpose -- so the build
+#                      threw, the SKIP above could never be reached, and none of
+#                      the other eleven ran on a machine without the KGN tree.
+#
 # Com232MeshTest needs a com0com null-modem pair on COM5<->COM6 (setupc install
 # PortName=COM5 PortName=COM6). Without one it reports SETUP (exit 1); that is a
 # missing prerequisite, not a failure, and the summary counts it separately.
@@ -64,8 +72,24 @@ if (-not $NoBuild) {
                Select-Object -First 1
     if (-not $msbuild) { throw "MSBuild not found" }
 
+    # Every project the solution names, read from the solution so a harness
+    # added later cannot be left out of this list by accident. Solution target
+    # names are the project names, which in this tree are plain identifiers.
+    $sln     = Join-Path $here 'DirectExamples(2026).sln'
+    $targets = @( Select-String -Path $sln -Pattern '^Project\("[^"]+"\)\s*=\s*"([^"]+)"' |
+                  ForEach-Object { $_.Matches[0].Groups[1].Value } )
+    if ($env:KgnRoot -or $env:KGN_ROOT) {
+        Write-Host "KgnRoot set: RouteLoopbackTest is in this build."
+    } else {
+        $targets = @( $targets | Where-Object { $_ -ne 'RouteLoopbackTest' } )
+        Write-Host "KgnRoot not set: RouteLoopbackTest is not built (reported as SKIP)."
+    }
+
     Write-Host "building $Config..."
-    & $msbuild (Join-Path $here 'DirectExamples(2026).sln') `
+    # Built as a string: `/t:($targets -join ';')` does not interpolate in
+    # argument position, and msbuild would receive the literal text.
+    $targetSwitch = '-t:' + ($targets -join ';')
+    & $msbuild $sln $targetSwitch `
         -p:Configuration=$Config -p:Platform=x64 -v:minimal -nologo -m |
         Where-Object { $_ -match 'error|warning C' }
     if ($LASTEXITCODE -ne 0) { throw "build failed" }
